@@ -1,0 +1,252 @@
+﻿<nav class="navbar navbar-expand-lg  navbar-dark py-0 fixed-top">
+    <div class="container">
+        <div class="login">
+            <a href="">
+                <p>   تسجيل / تسجيل الدخول <img src="~/Image/user (1).png" alt=""> </p>
+                
+            </a>
+        </div>        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ">
+            
+              <li class="nav-item">
+                <a class="nav-link" href="">تواصل معنا</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">أضف عقارك</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">مزارع شاليهات / للأفراح</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">إستراحات / مزارع </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">شاليهات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">الرئيسية</a>
+              </li>
+            </ul>
+            
+          </div>
+          <a class="navbar-brand" href="#"> <img src="~/Image/logo2.jpg" alt=""></a>
+
+
+        </div>
+
+</nav>
+<!-- nav bar -->
+
+<!-- landing -->
+<div class="landing-chalets" style="background-image:url('@ViewBag.Image')"> 
+    <div class="overlay"></div>
+    <div class="text">
+        <div class="content">
+            <h1>
+             أفضل الشاليهات
+            <br>
+            <span  class="checkin">احجز الآن</span>
+        </h1>
+        </div>
+    </div>
+</div>
+<!-- landing -->
+
+<!-- filter -->
+<div class="filter">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3">
+        <div class="label"> 
+          <label for="">عدد غرف النوم </label>
+        </div>
+      <select class="form-select" aria-label="Default select example" required>
+        <option value="0" selected>الكل</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      </div>
+      <div class="col-md-3">
+      <div class="label"> 
+        <label for=""> السعة </label>
+    </div>
+    <select class="form-select" aria-label="Default select example" required>
+      <option value="0" selected> الكل </option>
+      <option value="1">  (0 - 10) أشخاص </option>
+      <option value="2">(10 - 20) أشخاص</option>
+      <option value="3">(20 - 30) أشخاص</option>
+      <option value="4">( +30 ) شخص</option>
+    </select>
+      </div>
+      <div class="col-md-3">
+        <div class="label"> 
+          <label for="">  السعر </label>
+      </div>
+      <select class="form-select" aria-label="Default select example" required>
+        <option value="0" selected>الكل</option>
+        <option value="1" > (0-100) دينار  </option>
+        <option value="2"> (100-200) دينار </option>
+        <option value="3"> (200-300) دينار </option>
+        <option value="4"> (+300) دينار </option>
+      </select>
+      </div>
+      <div class="col-md-3">
+        <div class="label"> 
+          <label for="">المحافظة </label>
+      </div>
+      <select class="form-select" aria-label="Default select example" required>
+        <option selected>إختر المنطقة</option>
+        <option value="1">عمان</option>
+        <option value="2">الزرقاء</option>
+        <option value="3">إربد</option>
+        <option value="4">عجلون</option>
+        <option value="5">جرش</option>
+        <option value="6">الكرك</option>
+        <option value="7">الطفيلة</option>
+        <option value="8">البلقاء</option>
+        <option value="9">المفرق</option>
+        <option value="10">العقبة</option>
+        <option value="11">معان</option>
+      </select> 
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- filter -->
+
+<!-- cards -->
+<div class="cards">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card mb-3" >
+                    <div class="row ">
+                          
+                        <div class="col-md-6">
+                       <div class="card-body">
+                         <h5 class="card-title">شاليه بمسبح وجلسات خارجيه</h5>
+                         <p class="card-text1">  التقييم   <span class="number1"> 9.2 </span> <img class="star" src="image/star.png" alt=""></p>
+                         <p class="card-text2"> الزرقاء - بيرين <i class="bi bi-geo-alt-fill"></i></p>
+                         <p class="card-text3">  دينار /ليلة <span class="number2">200</span> </p>
+                       </div>
+                     </div>
+                     
+                       <div class="col-md-6">
+                       <a href=""><img class="image-farm" src="html/image chalets/chalet 4/1.jpeg" class="card-img" alt="..."></a>
+                       </div>
+                
+                    </div>    
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card mb-3" >
+                    <div class="row ">
+
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">شاليه بمسبح وجلسات خارجيه</h5>
+                          <p class="card-text1">  التقييم   <span class="number1"> 9.2 </span> <img class="star" src="image/star.png" alt=""></p>
+                          <p class="card-text2"> الزرقاء - بيرين <i class="bi bi-geo-alt-fill"></i></p>
+                          <p class="card-text3">  دينار /ليلة <span class="number2">200</span> </p>
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                          <a href=""><img class="image-farm" src="html/image chalets/chalet 3/1.jpg" class="card-img" alt="..."></a>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card mb-3" >
+                    <div class="row ">
+
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">شاليه بمسبح وجلسات خارجيه</h5>
+                          <p class="card-text1">  التقييم   <span class="number1"> 9.2 </span> <img class="star" src="image/star.png" alt=""></p>
+                          <p class="card-text2"> الزرقاء - بيرين <i class="bi bi-geo-alt-fill"></i></p>
+                          <p class="card-text3">  دينار /ليلة <span class="number2">200</span> </p>
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                          <a href=""><img class="image-farm" src="html/image chalets/chalet 2/1.jpg" class="card-img" alt="..."></a>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card mb-3" >
+                    <div class="row ">
+
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">شاليه بمسبح وجلسات خارجيه</h5>
+                          <p class="card-text1">  التقييم   <span class="number1"> 9.2 </span> <img class="star" src="image/star.png" alt=""></p>
+                          <p class="card-text2"> الزرقاء - بيرين <i class="bi bi-geo-alt-fill"></i></p>
+                          <p class="card-text3">  دينار /ليلة <span class="number2">200</span> </p>
+                        </div>
+                      </div>
+
+                        <div class="col-md-6">
+                          <a href=""><img class="image-farm"src="html/image chalets/chalet 1/5.png " class="card-img" alt="..."></a>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- cards -->
+
+
+
+
+<!--footer  -->
+<footer>
+    <div class="container">
+     <div class="row">
+       <div class="col-3 col-md-4 col-lg-4">
+      
+        <div class="content">
+         <h4 class="social-title"> شاليت إن على السوشال ميديا</h4>
+         <ul class="social">
+          <li><a href="#"><img src="~/Image/twitter-42.png" alt=""></a></li>
+          <li><a href="#"><img src="~/Image/instagram-41.png" alt=""></a></li>
+          <li><a href="#"><img src="~/Image/facebook-41.png" alt=""></a></li>
+         </ul>
+         <h5 class="privacy">جميع الحقوق محفوظة ©  2022 شاليت إن</h5>
+        </div>
+       </div>
+       <div class="col-3 col-md-4 col-lg-4">
+         <div class="content">
+           <h4 class="links-title"> الروابط السريعة</h4>
+           <ul class="links">
+             <li><a href="">الرئيسية</a></li>
+             <li><a href="">تواصل معنا</a></li>
+             <li><a href="">العروض</a></li>
+           </ul>
+         </div>
+       </div>
+       <div class="col-3 col-md-4 col-lg-4">
+         <div class="footer-logo">
+           <img src="~/Image/logo.png" alt="">
+         </div>
+   
+       </div>
+     </div>
+    </div>
+</footer>

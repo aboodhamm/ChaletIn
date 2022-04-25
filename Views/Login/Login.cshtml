@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "../Shared/_LoginRegisterLayout.cshtml";
+}
+<div class="login-register-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="login-form">
+                    <h2>تسجيل الدخول</h2>
+                    <form asp-controller="Login" asp-action="Authenticate">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني">
+
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور">
+                        </div>
+                        <p>قم بإنشاء الحساب الخاص بك <a asp-controller="Register" asp-action="Register">سجل الآن</a></p>
+                        <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

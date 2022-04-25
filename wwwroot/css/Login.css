@@ -1,0 +1,364 @@
+﻿body::before {
+    display: block;
+    content: "";
+    height: 72px;
+}
+
+.body {
+    font-family: "Tajawal", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+/* nav */
+.navbar {
+    background-color: #6a2bb1;
+}
+
+#navbarNav {
+    margin-left: 390px;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 5px;
+}
+
+    .navbar-nav .nav-item .nav-link {
+        font-family: 'Tajawal', sans-serif;
+        color: white;
+        font-size: 18px;
+        transition: 0.3s;
+        position: relative;
+    }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ffc825;
+            border-bottom: 1px solid #ffc825;
+        }
+
+.navbar-brand img {
+    width: 70px;
+    height: 70px;
+    margin-right: 50px;
+}
+
+.login {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: bold;
+    position: absolute;
+    left: 150px;
+    top: 6px;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+    .login a {
+        display: block;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+    }
+
+        .login a img {
+            width: 30px;
+            position: relative;
+        }
+
+    .login p {
+        padding: 8px;
+        border: 2px solid #ffc825;
+        border-radius: 105px;
+    }
+/* nav */
+
+/* login */
+.login-register-form {
+    background-image: url('../image/large2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    position: relative;
+}
+
+    .login-register-form .overlay {
+        background-color: rgba(0, 0, 0, 0.384);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .login-register-form .login-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 400px;
+        background-color: rgba(6, 85, 255, 0.219);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0px 0px 10px 0px #000;
+    }
+
+        .login-register-form .login-form h2 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 30px;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .login-register-form .login-form h2::after {
+                content: '';
+                display: block;
+                width: 200px;
+                height: 4px;
+                background-color: #ffc825;
+                margin: 20px auto;
+            }
+
+        .login-register-form .login-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-register-form .login-form form {
+            margin-top: 50px;
+        }
+
+        .login-register-form .login-form .form-group input {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            padding-left: 10px;
+            font-size: 18px;
+            font-family: 'Tajawal', sans-serif;
+            color: #000000;
+            text-align: right;
+        }
+
+        .login-register-form .login-form button {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #ffc825;
+            font-size: 28px;
+            font-weight: bold;
+            padding-bottom: 50px;
+            font-family: 'Tajawal', sans-serif;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .login-register-form .login-form p {
+            font-size: 18px;
+            font-family: 'Tajawal', sans-serif;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .login-register-form .login-form p a {
+                color: #ffc825;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .login-register-form .login-form p a:hover {
+                    color: #ffffff;
+                }
+
+
+
+
+
+/* login */
+
+/* register */
+.register-form {
+    background-image: url('../image/large2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    position: relative;
+}
+
+    .register-form .overlay {
+        background-color: rgba(0, 0, 0, 0.384);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .register-form .login-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 500px;
+        background-color: rgba(6, 85, 255, 0.219);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0px 0px 10px 0px #000;
+    }
+
+        .register-form .login-form h2 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 30px;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .register-form .login-form h2::after {
+                content: '';
+                display: block;
+                width: 200px;
+                height: 4px;
+                background-color: #ffc825;
+                margin: 20px auto;
+            }
+
+        .register-form .login-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .register-form .login-form form {
+            margin-top: 50px;
+        }
+
+        .register-form .login-form .form-group input {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            padding-left: 10px;
+            font-size: 18px;
+            font-family: 'Tajawal', sans-serif;
+            color: #000000;
+            text-align: right;
+        }
+
+        .register-form .login-form button {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #ffc825;
+            font-size: 28px;
+            font-weight: bold;
+            padding-bottom: 50px;
+            font-family: 'Tajawal', sans-serif;
+            color: #ffffff;
+            text-align: center;
+        }
+/* register */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer */
+
+footer {
+    background-color: #6a2bb1;
+}
+
+    footer img {
+        width: 70%;
+        height: 70%;
+        margin-left: 150px;
+    }
+
+    footer .content {
+        padding: 20px;
+        color: #fff;
+        text-align: right;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: 'Tajawal', sans-serif;
+        margin-top: 25px;
+    }
+
+        footer .content .links {
+            margin-top: 40px;
+        }
+
+        footer .content .links-title {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        footer .content .links li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        footer .content .links li {
+            text-align: center;
+            text-decoration: none;
+            list-style-type: none;
+            position: relative;
+            margin-top: 12px;
+            margin-left: 150px;
+        }
+
+            footer .content .links li a:hover {
+                color: #ffc825;
+                border-bottom: 1px solid #ffc825;
+            }
+
+        footer .content .social {
+            display: flex;
+            justify-content: end;
+            margin-top: 20px;
+            margin-right: 75px;
+            margin-bottom: 80px;
+        }
+
+            footer .content .social li {
+                text-decoration: none;
+                color: #fff;
+                list-style-type: none;
+                margin-left: 5px;
+            }
+
+        footer .content h4 {
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        footer .content h5 {
+            font-weight: bold;
+        }
+
+        footer .content .social li img {
+            width: 30px;
+            height: 30px;
+            margin-left: 15px;
+            margin-right: 10px;
+        }
+
+/* footer */
