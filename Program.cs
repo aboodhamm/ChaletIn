@@ -1,4 +1,4 @@
-using Chaletin.Data;
+
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +11,10 @@ builder.Services.AddDbContext<ChaletinDbContext>(options =>
     options.UseSqlServer(connectionString));;
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ChaletinDbContext>();;
+    .AddEntityFrameworkStores<ChaletinDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

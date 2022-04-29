@@ -11,12 +11,17 @@ namespace Chaletin.Controllers
         {
             return View();
         }
+        [Authorize]
         public IActionResult ContactUs()
         {
             return View();
         }
         public IActionResult Farms(int type)
         {
+            if(User.IsInRole("user"))
+            {
+
+            }
             string imageSource = string.Empty;
             switch (type)
             {
@@ -34,15 +39,5 @@ namespace Chaletin.Controllers
             ViewBag.Image = imageSource;
             return View();
         }
-        //public IActionResult Chalets()
-        //{
-        //    ViewBag.Image = "../wwwroot/Image/chalets2.jpg";
-        //    return View();
-        //}
-        //public IActionResult Weddings()
-        //{
-        //    ViewBag.Image = "../wwwroot/Image/wedding2.jpg";
-        //    return View();
-        //}
     }
 }
