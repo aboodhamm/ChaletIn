@@ -1,0 +1,74 @@
+﻿@model List<Chaletin.Areas.Identity.Data.Booking>
+<div class="check">
+  <div class="container">
+    <div class="row" style="margin-top:2%">
+        @{foreach (var item in @Model)
+            {
+                <div class="col-4">
+                <div class="pay" style="margin-top:2%">
+                    <div class="content">
+                    <h3>الحجز</h3>
+                    <p class="card-text1"> 
+                    <span> دينار/ ليلة</span> 
+                    <span class="number1"> @item.Price </span> 
+                    </p>
+                    <div class="days">
+                    <h5>رقم الحجز</h5>
+                    <input type="text" disabled value="@item.Id" name="From" id="From">
+                    <h5>الاسم</h5>
+                    <input type="text" disabled value="@item.Farm.Title" name="From" id="From">
+                    <h5>تاريخ الوصول</h5>
+                    <input type="text" disabled value="@item.From.ToShortDateString()" name="From" id="From">
+                    <h5>تاريخ المغادرة</h5>
+                    <input type="text" disabled value="@item.To.ToShortDateString()" name="From" id="From">
+                    <h5>عدد الليالي</h5>
+                    <p>@item.Period</p>
+                    </div>
+
+            <div class="times">
+              <p>
+                <span>وقت الدخول </span>
+
+                <span> 2:00 ظهراً  </span class="time1">
+                <img src="~/Image/enter.png" alt="">
+              </p>
+              <p>
+                <span>وقت المغادرة </span>
+                
+                <span> 12:00 ظهراً  </span>
+                <img src="~/Image/logout.png" alt="">
+              </p>
+            </div>
+            <div class="total">
+              <h5>تفاصيل الفاتورة</h5>
+              <p>
+                <span>الحالة :</span>
+               @if(@item.Payed)
+                {
+                    <span>مدفوعة</span>
+                }
+                else
+                {
+                    <span>غير مدفوعة</span>
+                }
+              </p>
+              <p>
+                <span>المبلغ الكلي :</span>
+                <span>@item.TotalAmount دينار</span> 
+              </p>
+            </div>
+            @if(!@item.Payed)
+                {
+                    <a class="btn btn-danger">الغاء الحجز</a>
+                    <a asp-controller="Farm" asp-action="Pay" asp-all-route-id="@item.Id" class="btn btn-success">ادفع الان</a>
+                }
+          </div>   
+        </div>
+          </div>
+                    }
+                    }
+                               
+    
+    </div>
+  </div>
+</div>

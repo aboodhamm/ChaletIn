@@ -1,0 +1,106 @@
+﻿@model Chaletin.Models.Model.FarmDtoModel
+<div class="contact">
+    <div class="container">
+
+        <h3 class="title">  أضف عقارك  </h3>
+
+        <div class="form-contact">
+            <form asp-controller="Farm" asp-action="AddFarm" class="row">
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>الإسم </label>
+                    </div>
+                    @Html.TextBoxFor(x => x.Title)
+                </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>السعر </label>
+                    </div>
+                    @Html.TextBoxFor(x => x.Price,new {@Type = "number"})
+                </div>
+                <div class="col-md-3 add-image">
+                    <div class="label">
+                        <label for="">إضافة صور  العقار </label>
+                    </div>
+                    @*<input type="file" class="form-control-image" multiple required>*@
+                        @Html.TextBoxFor(x => x.ImageSource, new { type = "file" })
+
+                </div>
+                <div class="col-md-2">
+                    <div class="label">
+                        <label for="">عدد غرف النوم </label>
+                    </div>
+                    <select class="form-select" name="BedRoomCount" aria-label="Default select example" required>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="label">
+                        <label for="">عدد دورات المياه </label>
+                    </div>
+                    <select class="form-select" name="BathRoomCount" aria-label="Default select example" required>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="label">
+                        <label for="">عدد المجالس </label>
+                    </div>
+                    <select class="form-select" name="LivingRoomCount" aria-label="Default select example" required>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="label">
+                        <label for="">  العقار </label>
+                    </div>
+                    <select class="form-select" name="Type" aria-label="Default select example" required>
+                        <option value="1">إستراحة / مزرعة </option>
+                        <option value="2">شاليه</option>
+                        <option value="3">شاليه, مزرعة / للأفراح </option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="label">
+                        <label for="">المحافظة </label>
+                    </div>
+                    <select class="form-select" name="City" aria-label="Default select example" required>
+                        <option disabled selected>إختر المنطقة</option>
+                        <option value="1">عمان</option>
+                        <option value="2">الزرقاء</option>
+                        <option value="3">إربد</option>
+                        <option value="4">عجلون</option>
+                        <option value="5">جرش</option>
+                        <option value="6">الكرك</option>
+                        <option value="7">الطفيلة</option>
+                        <option value="8">البلقاء</option>
+                        <option value="9">المفرق</option>
+                        <option value="10">العقبة</option>
+                        <option value="11">معان</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <div class="label">
+                        <label for="">وصف العقار</label>
+                    </div>
+                    <textarea name="" id="" cols="30" rows="10" class="form-control" required></textarea>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary">إضافة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

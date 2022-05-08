@@ -1,0 +1,91 @@
+﻿@model Chaletin.Models.Model.FarmViewModel
+<div class="contact">
+    <div class="container">
+        <h3 class="title">تأكيد الحجز</h3>
+        <div class="form-contact">
+            <form asp-controller="Farm" asp-action="ConfirmBooking" class="row">
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.Price)
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>السعر لليوم</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.Price,new {disabled="true"})
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>المحافظة </label>
+                    </div>
+                    @Html.TextBoxFor(x => x.City,new {disabled="true"})
+                </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>الاسم</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.Title,new {disabled="true"})
+                </div>
+
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>عدد دورات المياه</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.BathRoomCount,new {disabled="true"})
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>عدد المجالس </label>
+                    </div>
+                    @Html.TextBoxFor(x => x.LivingRoomCount,new {disabled="true"})
+                </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>عدد غرف النوم</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.BedRoomCount,new {disabled="true"})
+                </div>
+                 <div class="col-md-4">
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>الى</label>
+                    </div>
+                    <input type="date" name="To" />
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>من</label>
+                    </div>
+                    <input type="date" name="From" />
+                </div>
+               <div class="col-md-4 form-check">
+                   <div class="label">
+                        <label class="form-check-label">
+                        الدفع لاحقاً
+                    </label>
+                   </div>
+                    @Html.RadioButtonFor(x => x.PayLater,"false",new {@class = "form-check-input"})
+                </div>
+                <div class="col-md-4 form-check">
+                   <div class="label">
+                        <label class="form-check-label">
+                        الدفع الان
+                    </label>
+                   </div>
+                    @Html.RadioButtonFor(x => x.PayLater,"false",new {@class = "form-check-input"})
+                </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>السعر الكلي</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.BedRoomCount,new {disabled="true"})
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <p style="color:red;">*عدم الدفع خلال 24 ساعة من الحجز يعتبر الحجز ملغي</p>
+                </div>
+                    <input type="submit" class="btn btn-success" value="تأكيد الحجز" style="color:white;text-align: center;height: 50px;border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-top: 10px;border: 1px solid #ffc825;">
+            </form>
+        </div>
+    </div>
+</div>

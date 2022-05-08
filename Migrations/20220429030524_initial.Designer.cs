@@ -4,6 +4,7 @@ using Chaletin.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chaletin.Migrations
 {
     [DbContext(typeof(ChaletinDbContext))]
-    partial class ChaletinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220429030524_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,50 +23,6 @@ namespace Chaletin.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Chaletin.Areas.Identity.Data.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Disabled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("FarmId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Payed")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Period")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("To")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TotalAmount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FarmId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Booking");
-                });
 
             modelBuilder.Entity("Chaletin.Areas.Identity.Data.Farm", b =>
                 {
@@ -80,9 +38,6 @@ namespace Chaletin.Migrations
                     b.Property<int>("BedRoomCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
                     b.Property<int>("City")
                         .HasColumnType("int");
 
@@ -93,9 +48,6 @@ namespace Chaletin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LivingRoomCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("Rate")
@@ -323,23 +275,6 @@ namespace Chaletin.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Chaletin.Areas.Identity.Data.Booking", b =>
-                {
-                    b.HasOne("Chaletin.Areas.Identity.Data.Farm", "Farm")
-                        .WithMany()
-                        .HasForeignKey("FarmId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Chaletin.Areas.Identity.Data.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Farm");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Chaletin.Areas.Identity.Data.Farm", b =>

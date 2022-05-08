@@ -103,6 +103,7 @@ namespace Chaletin.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
+            public string Username { get; set; }
         }
 
 
@@ -125,6 +126,7 @@ namespace Chaletin.Areas.Identity.Pages.Account
                 user.EmailConfirmed = true;
                 user.Name = Input.Name;
                 user.Phone = Input.Phone;
+                user.UserName = Input.Username;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

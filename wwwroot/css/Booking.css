@@ -1,0 +1,704 @@
+body::before{
+    display: block;
+    content: "";
+    height: 72px;
+}
+.body{
+    font-family: "Tajawal", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body::before{
+  display: block;
+  content: "";
+  height: 72px;
+}
+.body{
+  font-family: "Tajawal", sans-serif;
+}
+html {
+scroll-behavior: smooth;
+}
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+/* nav */
+.navbar{
+  background-color: #6a2bb1;
+
+}
+#navbarNav{
+  margin-left: 390px;
+ 
+
+}
+
+.navbar-nav .nav-item{
+
+  margin-left: 5px;
+}
+.navbar-nav .nav-item .nav-link { 
+
+ font-family: 'Tajawal', sans-serif;
+ color: white;
+ font-size: 18px;
+ transition: 0.3s;
+ position: relative;
+}
+.navbar-nav .nav-item .nav-link:hover{
+
+  color: #ffc825 ;
+  border-bottom: 1px solid #ffc825;
+
+}
+.navbar-brand img {
+
+  width:  70px;
+  height: 70px;
+  margin-right: 50px;
+
+}
+.login{
+  font-family: 'Tajawal', sans-serif;
+  font-weight: bold;
+  position: absolute;
+  left: 150px;
+  top: 6px;
+  margin-right: 50px;
+  margin-top: 10px;
+  
+}
+.login a {
+  display: block;
+  color: rgb(255, 255, 255);
+ text-decoration: none;
+}
+.login a img{
+ width: 30px;
+ position: relative;
+
+}
+.login p{
+  padding: 8px;
+  border: 2px solid #ffc825;
+  border-radius: 105px;
+}
+/* nav */
+
+
+/* gallery */
+.gallery{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width:  80%;
+    margin-left: 10%;
+}
+.gallery a{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.gallery img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: 0.3s;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+/* gallery */
+
+
+
+/* pay */
+.check .pay{
+
+    width:  80%;
+    margin-left: 24%;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    border: 2px solid #0000003d;
+    border-radius: 5px;
+    padding: 20px;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+.check .pay .content h3{
+ 
+    font-size: 50px;
+    font-weight: bold;
+    color: #6a2bb1;
+    margin-bottom: 30px;
+}
+.check .pay .content h3::after{
+    content: "";
+    width: 150px;
+    height: 3px;
+    background-color: #ffc825;
+    display: block;
+    margin-left: 62px;
+    margin-top: 10px;
+}
+.check .pay .content .card-text1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-right: 75px;
+    position: relative;
+}
+.check .pay .content .number1{
+    font-size: 40px;
+    color: green;
+    font-weight: bold;
+    position: relative;
+  position: absolute;
+  top: -18px;
+  right: 0px;    
+}
+.check .pay .content .days h5{
+    font-size: 25px;
+    font-weight: bold;
+    color: #6a2bb1;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.check .pay .content .days input{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #0000003d;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.check .pay .content .days::before{
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #0000003d;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.check .pay .content .times::before{
+
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #0000003d;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.check .pay .content .times::after{
+
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: #0000003d;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 10px;
+}
+.check .pay .content button{
+    width: 100%;
+    height: 50px;
+    background-color: #6a2bb1;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.check .pay .content .total h5{
+    font-weight: bold;
+    font-size: 25px;
+    color: #6a2bb1;
+  
+  }
+  .check .pay .content .total h5::after{
+    content: "";
+    width: 40%;
+    height: 3px;
+    background-color: #ffc825;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 86px;
+  
+  }
+/* pay */
+
+
+
+/* check */
+.check{
+    width:  100%;
+}
+.check .details{
+
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #0000003d;
+    text-align: right;
+}
+.check .details nav{
+
+  margin-left: 62.25%;
+}
+.check .details .nav-link{
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+    color: #6a2bb1;
+    text-decoration: none;
+    padding: 20px;
+}
+   
+.check .details .nav-link:hover{
+    color: #ffc825;
+    border-bottom: 1px solid #ffc825;
+}
+
+.check .details .accordion{
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #0000003d;
+    text-align: right;
+}
+.check .details .accordion-item{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    text-align: right;
+    position: relative;
+}
+.check .details button .content{
+
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #6a2bb1;
+    margin-left: 700px;
+    position: relative;
+
+}
+.check .details button .content h5{
+    font-family: 'Tajawal', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #6a2bb1;
+    margin-left: -30px;
+    text-align: right;
+
+}
+.check .details button .content .text1{
+  font-family: 'Tajawal', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #6a2bb1;
+  margin-left: -100px;
+  text-align: right;
+
+}
+.check .details button .content .text2{
+  font-family: 'Tajawal', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #6a2bb1;
+  margin-left: -55px;
+  text-align: right;
+
+}
+.check .details button .content .text3{
+  font-family: 'Tajawal', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #6a2bb1;
+  margin-left: -78px;
+  text-align: right;
+
+}
+.check .details button .content img{
+    
+  position: absolute;
+  left: 70px;
+  top: -2px;
+  
+}
+.check .details .accordion-button::after{
+
+    position: absolute;
+}
+
+
+.check .accordion-content p{
+   
+    font-family: 'Tajawal', sans-serif;
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(80, 80, 80, 0.856);
+  }
+
+
+
+/* check */
+
+/* description */
+
+.check .description .content{
+
+  font-family: 'Tajawal', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+  margin-bottom: 50px;
+}
+.check .description .content img{
+  position: absolute;
+  right: 0px;
+  top: 54px;
+  width: 25px;
+  height: 25px;
+}
+.check .description .content h3{
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: -30px;
+  text-align: right;
+  margin-bottom: 20px;
+}
+.check .description .content p{
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(80, 80, 80, 0.856);
+  margin-left: -30px;
+  text-align: right;
+}
+.check .description .content .card-text1{
+
+  margin-right: 70px;
+}
+
+.check .description .content .number1{
+  
+  position: absolute;
+  right: 38px;
+  bottom: 42px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
+}
+
+.check .description .content .card-text3 img{
+
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -30px;
+  top: 3px;
+}
+.check .description .content .card-text4 img{
+
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  right: -30px;
+  top: 2px;
+}
+.check .description .content .card-text3{
+
+  position: absolute;
+  right: 300px;
+  top: 54px;
+}
+.check .description .content .card-text3::after{
+
+  content: "";
+  height: 70px;
+  width: 3px;
+  position: absolute;
+  right: -50px;
+  top: 0px;
+  background-color: #0404046a;
+}
+.check .description .content .card-text4{
+  
+  position: absolute;
+  right: 300px;
+  top: 100px;
+
+}
+
+/* description */
+
+/* comment */
+.check .comment{
+
+  margin-top: 50px;
+  background-color: #f5f5f5;
+  width: 50%;
+  text-align: right;
+  margin-left: 45%;
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 50px;
+  box-shadow: 0px 0px 10px #0000003d;
+  position: relative;
+}
+
+.check .comment h5{
+
+  font-size: 20px;
+  font-weight: bold;
+  color: #6a2bb1;
+  margin-bottom: 20px;
+}
+.check .comment p{
+
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(80, 80, 80, 0.856);
+  margin-bottom: 20px;
+}
+
+.check .contact-comment{
+  
+    margin-top: 80px;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    box-shadow: 0px 0px 10px #0000003d;
+    color: #6a2bb1;
+}
+.check .contact-comment a{
+
+  margin-right: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffc825;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+.check .contact-comment a:hover{
+
+  color: #6a2bb1;
+}
+
+
+
+/* comment */
+
+/* rate */
+.rate{
+  
+    margin-top: 50px;
+    background-color: #f5f5f5;
+    width: 50%;
+    text-align: right;
+    margin-left: 45%;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    box-shadow: 0px 0px 10px #0000003d;
+    position: relative;
+}
+.rate h5{
+
+  font-size: 20px;
+  font-weight: bold;
+  color: #6a2bb1;
+  margin-bottom: 20px;
+}
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #d4d3d3;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #ffc825;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #d4d3d3;
+  text-shadow: 0 0 5px #ffc825;
+}
+.rate  .submit{
+  margin-top: 30px;
+  width: 50%;
+  text-align: center;
+  padding: 5px 30px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px #0000003d;
+  color: #fff;
+  background-color: #ffc825
+}
+/* rate */
+
+
+/* footer */
+
+footer {
+    margin-top: 120px;
+     background-color:#6a2bb1;
+     
+     
+ }
+
+ footer img{
+ 
+     width: 70%;
+     height: 70%;
+     margin-left: 150px;
+   
+ }
+ 
+ footer .content{
+     padding: 20px;
+     color: #fff;
+     text-align: right;
+     font-size: 18px;
+     font-weight: bold;
+     font-family: 'Tajawal', sans-serif;
+     margin-top: 25px;
+ }
+ 
+ footer .content .links{
+     margin-top: 40px;
+ }
+ 
+ footer .content .links-title{
+  
+     font-size: 25px;
+     font-weight: bold;
+ }
+ footer .content .links li a{
+   text-decoration: none;
+   color: #fff;
+ }
+ 
+ footer .content .links li{
+     text-align: center;
+     text-decoration: none;
+     list-style-type: none;
+     position: relative;
+     margin-top: 12px;
+     margin-left: 150px;
+ }
+ 
+ footer .content .links li a:hover{
+   color: #ffc825 ;
+   border-bottom: 1px solid #ffc825;
+ }
+ 
+ footer .content .social{
+ 
+   display: flex;
+   justify-content: end;
+   margin-top: 20px;
+   margin-right: 75px;
+   margin-bottom: 80px;
+ }
+ footer .content .social li {
+   text-decoration: none;
+   color: #fff;
+   list-style-type: none;
+   margin-left: 5px;
+ }
+ footer .content h4{
+   font-weight: bold;
+   margin-right: 20px;
+ }
+ footer .content h5{
+   font-weight: bold;
+ }
+ 
+ footer .content .social li img{
+ 
+   width: 30px;
+   height: 30px;
+   margin-left: 15px;
+   margin-right: 10px;
+ }
+ 
+ /* footer */
+ 

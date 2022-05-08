@@ -1,0 +1,115 @@
+﻿@using Chaletin.Models.Enum
+@model List<Chaletin.Models.Model.FarmViewModel>
+<div class="landing-farms" style="background-image:url('@ViewBag.Image')">
+    <div class="overlay"></div>
+    <div class="text">
+        <div class="content">
+            <h1>
+                أفضل الإستراحات و المزارع
+                <br>
+                <span class="checkin">احجز الآن</span>
+            </h1>
+        </div>
+    </div>
+</div>
+<div class="filter">
+    <div class="container">
+        <form asp-controller="Farm" asp-action="Index">
+        <div class="row">
+                    <input type="submit" class="btn btn-success" value="ابحث" style="height: 50px;border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-top: 10px;border: 1px solid #ffc825;">
+                <br />
+                <div class="col-md-3">
+                    <div class="label">
+                        <label for="">عدد غرف النوم </label>
+                    </div>
+                    <select class="form-select" name="BedRoomCount" id="BedRoomCount" aria-label="Default select example">
+                        <option value="0" selected>الكل</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="label">
+                        <label for=""> السعة </label>
+                    </div>
+                    <select class="form-select" name="Capacity" aria-label="Default select example">
+                        <option value="0" selected> الكل </option>
+                        <option value="10">  (0 - 10) أشخاص </option>
+                        <option value="20">(10 - 20) أشخاص</option>
+                        <option value="30">(20 - 30) أشخاص</option>
+                        <option value="40">( +30 ) شخص</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="label">
+                        <label for="">  السعر </label>
+                    </div>
+                    <select class="form-select" name="Price" aria-label="Default select example">
+                        <option value="0" selected>الكل</option>
+                        <option value="100"> (0-100) دينار  </option>
+                        <option value="200"> (100-200) دينار </option>
+                        <option value="300"> (200-300) دينار </option>
+                        <option value="400"> (+300) دينار </option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="label">
+                        <label for="">المحافظة </label>
+                    </div>
+                    <select class="form-select" name="City" aria-label="Default select example">
+                        <option value="0">الكل</option>
+                        @foreach (var item in (Dictionary<int,string>)ViewBag.Cities)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                    <input type="text" style="visibility:hidden" name="imageSrc" value="@ViewBag.Image"/>
+                </div>
+         </div>
+        </form>
+    </div>
+</div>
+<!-- filter -->
+<!-- cards -->
+<div class="cards">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in @Model)
+            {
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card mb-3">
+                        <div class="row ">
+
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Title</h5>
+                                    <p class="card-text1">
+                                        @{
+                                            for (int rate = 1; rate <= @item.Rate; rate++)
+                                            {
+                                                if (rate > 5)
+                                                {
+                                                    break;
+                                                }
+                                                <i class="fas fa-star" style="color:yellow"></i>
+                                            }
+                                        }
+                                    </p>
+                                    <p class="card-text2"> @item.City <i class="bi bi-geo-alt-fill"></i></p>
+                                    <p class="card-text3">@item.Price دينار/ليلة</p>
+                                    <div><a asp-controller="Farm" asp-action="Booking" asp-route-id="@item.Id" class="btn btn-success">احجز</a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="~/Image/Chalets.jpg" alt="farm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

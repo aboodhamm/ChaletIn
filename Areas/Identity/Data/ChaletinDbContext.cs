@@ -11,6 +11,8 @@ public class ChaletinDbContext : IdentityDbContext<User>
         : base(options)
     {
     }
+    public DbSet<Farm> Farm { get; set; }
+    public DbSet<Booking> Booking{ get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
