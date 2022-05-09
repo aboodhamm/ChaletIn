@@ -4,6 +4,7 @@ using Chaletin.Models.Enum;
 using Chaletin.Models.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Chaletin.Controllers
@@ -49,7 +50,7 @@ namespace Chaletin.Controllers
                         {
                             Id = x.Id,
                             Title = x.Title,
-                            ImageSource = x.ImageSource,
+                            //ImageSource = x.ImageSource,
                             Type = (FarmType)x.Type,
                             City = (City)x.City,
                             LivingRoomCount = x.LivingRoomCount,
@@ -73,6 +74,33 @@ namespace Chaletin.Controllers
             var UserRole = _context.UserRoles.Any(x => x.UserId == GetUserId());
             return View(farms);
         }
+        public IActionResult FarmDetails(int id)
+        {
+            var farm = _context.Farm.Find(id);
+            var comments = _context.Comments.Where(x => x.FarmId == id).OrderBy(x=>x.Id).Include(x => x.User).ToList();
+            var result = new FarmDetailsViewModel()
+            {
+                Id = farm.Id,
+                Title = farm.Title,
+                //ImageSource = farm.ImageSource,
+                Type = (FarmType)farm.Type,
+                City = (City)farm.City,
+                LivingRoomCount = farm.LivingRoomCount,
+                BedRoomCount = farm.BedRoomCount,
+                BathRoomCount = farm.BathRoomCount,
+                Description = farm.Description,
+                Rate = farm.Rate,
+                Price = farm.Price,
+                LivingRoomDescription = farm.LivingRoomDescription,
+                SwimmingPoolDescription = farm.SwimmingPoolDescription,
+                BedRoomDescription = farm.BedRoomDescription,
+                BathRoomDescription = farm.BathRoomDescription,
+                KitchenDescription = farm.KitchenDescription,
+                PublicUtilityDescription = farm.PublicUtilityDescription
+            };
+            result.Comments = comments;
+            return View(result);
+        }
 
         [Authorize]
         public IActionResult Add()
@@ -90,7 +118,7 @@ namespace Chaletin.Controllers
                 Title = model.Title,
                 Price = model.Price,
                 Rate = model.Rate,
-                ImageSource = model.ImageSource,
+                //ImageSource = model.ImageSource,
                 Type = (int)model.Type,
                 City = (int)model.City,
                 LivingRoomCount = model.LivingRoomCount,
@@ -113,7 +141,7 @@ namespace Chaletin.Controllers
             {
                 Id = farm.Id,
                 FarmTitle = farm.Title,
-                ImageSource = farm.ImageSource,
+                //ImageSource = farm.ImageSource,
                 Type = (FarmType)farm.Type,
                 City = (City)farm.City,
                 LivingRoomCount = farm.LivingRoomCount,
@@ -210,6 +238,39 @@ namespace Chaletin.Controllers
         public IActionResult Dashboard()
         {
             return View();
+        }
+       
+        [Authorize]
+        public IActionResult AddComment(int farmId,string comment)
+        {
+            var userId = GetUserId();
+            Comments result = new()
+            {
+                UserId = userId,
+                FarmId = farmId,
+                Comment = comment,
+                CreatedDate = DateTime.Now
+            };
+            _context.Comments.Add(result);
+            _context.SaveChanges();
+            return RedirectToAction("FarmDetails", "Farm",new {id = farmId});
+        }
+
+        public IActionResult AddRate(int rate, int farmId)
+        {
+            var farm = _context.Farm.Where(x => x.Id == farmId).FirstOrDefault();
+            var currentRate = farm.Rate;
+            if (currentRate == 5 && (rate < currentRate))
+                currentRate -= 0.5;
+            else if ((currentRate == 1 || currentRate == 0) && (rate > currentRate))
+                currentRate += 0.5;
+            else if (currentRate > rate)
+                currentRate -= 0.5;
+            else if (currentRate < rate)
+                currentRate += 0.5;
+            farm.Rate = currentRate;
+            _context.SaveChanges();
+            return RedirectToAction("FarmDetails", "Farm", new { id = farmId });
         }
     }
 }

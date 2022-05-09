@@ -13,6 +13,7 @@ public class ChaletinDbContext : IdentityDbContext<User>
     }
     public DbSet<Farm> Farm { get; set; }
     public DbSet<Booking> Booking{ get; set; }
+    public DbSet<Comments> Comments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

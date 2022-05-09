@@ -1,8 +1,4 @@
-﻿body::before {
-    display: block;
-    content: "";
-    height: 72px;
-}
+﻿
 
 .body {
     font-family: "Tajawal", sans-serif;
@@ -84,12 +80,11 @@ html {
     background-image: url('../image/large2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 80vh;
+    height: 721px;
     position: relative;
 }
 
     .login-register-form .overlay {
-        background-color: rgba(0, 0, 0, 0.384);
         height: 100%;
         width: 100%;
         position: absolute;
@@ -189,12 +184,11 @@ html {
     background-image: url('../image/large2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 80vh;
+    height: 900px;
     position: relative;
 }
 
     .register-form .overlay {
-        background-color: rgba(0, 0, 0, 0.384);
         height: 100%;
         width: 100%;
         position: absolute;
@@ -208,7 +202,7 @@ html {
         left: 50%;
         transform: translate(-50%, -50%);
         width: 400px;
-        height: 500px;
+        height: auto;
         background-color: rgba(6, 85, 255, 0.219);
         border-radius: 10px;
         padding: 30px;

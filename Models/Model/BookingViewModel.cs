@@ -13,7 +13,7 @@ namespace Chaletin.Models.Model
         public int BedRoomCount { get; set; }
         public int BathRoomCount { get; set; }
         public string Description { get; set; }
-        public int Rate { get; set; }
+        public double Rate { get; set; }
         public int Price { get; set; }
         public string UserId { get; set; }
         public bool PayLater { get; set; }

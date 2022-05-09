@@ -1,8 +1,4 @@
-﻿body::before {
-    display: block;
-    content: "";
-    height: 72px;
-}
+﻿
 
 .body {
     font-family: "Tajawal", sans-serif;

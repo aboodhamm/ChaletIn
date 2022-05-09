@@ -1,0 +1,334 @@
+﻿@model Chaletin.Models.Model.FarmDetailsViewModel
+@using Microsoft.AspNetCore.Identity
+@using Chaletin.Areas.Identity.Data
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    bool signIn = SignInManager.IsSignedIn(User);
+}
+<style>
+.img {
+  width: 33%!important;
+  height: auto!important;
+  max-width: 28%!important;
+}
+</style>
+<div class="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- gallery -->
+
+<!-- details -->
+<div class="check">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+               <div class="description">
+          <div class="content">
+           <h3>  
+            @Model.Title
+          </h3>
+          <p>
+            <p class="card-text1">  التقييم   <span class="number1"> @Model.Rate </span> <img class="star" src="~/Image/star.png" alt=""></p>
+            <p class="card-text2"> @Model.City <i class="bi bi-geo-alt-fill"></i></p>
+          </p>
+          
+          </div>
+        </div>
+          </div>
+      </div>
+    <div class="row">
+      
+      <div class="col-12 col-md-4 col-lg-4">
+
+        <div class="pay">
+          <div class="content">
+
+            <h3>الحجز</h3>
+            <p class="card-text1"> 
+
+                <span> دينار/ ليلة</span> 
+                <span class="number1"> @Model.Price </span> 
+
+
+            </p>
+          
+            <div class="times">
+              <p>
+               <span>وقت الدخول </span>
+                <span> 2:00 ظهراً  </span class="time1">
+                <img src="~/Image/enter.png" alt="">
+              </p>
+              <p>
+                 <span>وقت المغادرة </span>
+                <span> 12:00 ظهراً  </span>
+                <img src="~/Image/logout.png" alt="">
+              </p>
+            </div>
+
+           <a asp-controller="Farm" asp-action="Booking" asp-route-id="@Model.Id" class="btn btn-success">احجز</a>
+          
+          </div> 
+
+        </div>
+
+      </div>
+
+      <div class="col-12 col-md-8 col-lg-8">
+        <div class="details">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                @if(signIn)
+                {
+                    <button class="nav-link " id="nav-rate-tab" data-bs-toggle="tab" data-bs-target="#nav-rate" type="button" role="tab" aria-controls="nav-rate" aria-selected="true">التقييم </button>                
+                }
+                <button class="nav-link " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">التعليقات </button>
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="false">المواصفات</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                 <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                    
+                    <div class="content">
+                      
+                      <h5>المجالس </h5>
+                      <img src="../image-all/1.png" alt="">
+                    </div>
+
+                  </button>
+                </h2>
+                <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+                      <p>@Model.LivingRoomDescription</p>
+                    </div>
+                  </div>
+                </div>
+                 </div>
+                 
+                 <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
+                      
+                      <div class="content">
+                        <h5>المسابح </h5>
+                        <img src="../image-all/2.png" alt="">
+                      </div>
+  
+                    </button>
+                  </h2>
+                  <div id="flush-collapse2" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                      <div class="accordion-content">
+                        <p> @Model.SwimmingPoolDescription</p>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  
+                 <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
+                      
+                      <div class="content">
+                        
+                        <h5 class="text1">غرف النوم والأسرة </h5>
+                        <img src="../image-all/3.png" alt="">
+                      </div>
+  
+                    </button>
+                  </h2>
+                  <div id="flush-collapse3" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                      <div class="accordion-content">
+                       <p>@Model.BedRoomDescription</p>
+                      </div>
+                    </div>
+                  </div>
+                   </div>
+                   
+                   <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
+                        
+                        <div class="content">
+                          <h5 class="text2">دورات المياه</h5>
+                          <img src="../image-all/4.png" alt="">
+                        </div>
+    
+                      </button>
+                    </h2>
+                    <div id="flush-collapse4" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="accordion-content">
+                        <p>@Model.BathRoomDescription</p>
+                        </div>
+                      </div>
+                    </div>
+                     </div>
+                   
+                     <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+                          
+                          <div class="content">
+                            <h5>المطبخ</h5>
+                            <img src="../image-all/5.png" alt="">
+                          </div>
+      
+                        </button>
+                      </h2>
+                      <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                          <div class="accordion-content">
+                            <p>@Model.KitchenDescription</p>
+                          </div>
+                        </div>
+                      </div>
+                       </div>
+
+                       <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
+                            
+                            <div class="content">
+                              <h5 class="text3">المرافق العامة</h5>
+                              <img src="../image-all/6.png" alt="">
+                            </div>
+        
+                          </button>
+                        </h2>
+                        <div id="flush-collapse6" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                            <div class="accordion-content">
+                              <p>@Model.PublicUtilityDescription</p>
+                            </div>
+                          </div>
+                        </div>
+                         </div>    
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="background-color: #F5F5F5;border: 1px solid #DDDDDD;border-radius: 4px 0 4px 0;color: #3B3C3E;font-size: 12px;font-weight: bold;left: -1px;padding: 10px 7px 5px;height: 350px;overflow: scroll;overflow-x: hidden;">
+
+             @foreach(var comment in @Model.Comments)
+                {
+                    <div class="comment">
+                    <h5>@comment.User.Name</h5>
+                    <div class="comment-content">
+                        <p>@comment.Comment</p>
+                    </div>
+                    <p style="font-size:10px;float:left">@comment.CreatedDate.ToShortDateString() @comment.CreatedDate.ToShortTimeString()</p>
+                    </div>
+                }
+               @if(signIn)
+               {
+                <form asp-controller="Farm" asp-action="AddComment">
+                    <div class="comment">
+                    <input type="number" name="farmId" style="display:none" value="@Model.Id" />
+                    <input type="text" name="Comment" class="form-control" aria-describedby="button-addon2"><br />
+                    <button class="btn" style="background-color:#6a2bb1;color:white" type="submit" id="button-addon2">اضف تعليقك</button>    
+                    </div>
+                </form>
+               }
+                        </div>
+               @if(signIn)
+                        {
+                             <div class="tab-pane fade" id="nav-rate" role="tabpanel" aria-labelledby="nav-rate-tab">
+             
+              <div class="rate">
+
+                <h5> كيف كانت تجربتك ؟</h5>
+           
+                <form class="rating">
+                      <label>
+                <a asp-controller="Farm" asp-action="AddRate" asp-route-rate="1" asp-route-farmId="@Model.Id">
+                    <input type="radio" name="stars" value="1" />
+                    <span class="icon">★</span>
+                </a>  
+                </label>                  
+                <label>
+                    <a asp-controller="Farm" asp-action="AddRate" asp-route-rate="2" asp-route-farmId="@Model.Id">
+                    <input type="radio" name="stars" value="2" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    </a>
+                  </label>
+                  <label>
+                    <a asp-controller="Farm" asp-action="AddRate" asp-route-rate="3" asp-route-farmId="@Model.Id">
+                    <input type="radio" name="stars" value="3" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>   
+                    </a>
+                  </label>
+                  <label>
+                    <a asp-controller="Farm" asp-action="AddRate" asp-route-rate="4" asp-route-farmId="@Model.Id">
+                    <input type="radio" name="stars" value="4" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    </a>
+                </label>
+                  <label>
+                      <a asp-controller="Farm" asp-action="AddRate" asp-route-rate="5" asp-route-farmId="@Model.Id">
+                    <input type="radio" name="stars" value="5" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    </a>
+                  </label>
+                </form>
+
+                <button class="submit"> أرسل</button>
+                
+              </div>
+             
+            </div>
+                        }
+                       
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+Fancybox.bind('[data-fancybox="gallery"]', {
+  Thumbs: {
+    Carousel: {
+      fill: false,
+      center: true,
+    },
+  },
+});
+$(':radio').change(function() {
+  console.log('New star rating: ' + this.value);
+});
+</script>
