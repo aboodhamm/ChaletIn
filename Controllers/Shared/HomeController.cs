@@ -1,14 +1,24 @@
-﻿using Chaletin.Models;
+﻿using Chaletin.Areas.Identity.Data;
+using Chaletin.Models;
 using Chaletin.Models.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chaletin.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        private readonly ChaletinDbContext _context;
+        public HomeController(ChaletinDbContext context) : base(context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            var userId = GetUserId();
+            var farms = _context.Farm.Where(x => x.UserId == userId).ToList();
+            ViewBag.AdminFarms = farms;
             return View();
         }
         [Authorize]

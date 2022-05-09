@@ -39,8 +39,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/wwwroot/css"
 });
 app.UseRouting();
-app.UseAuthentication();;
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

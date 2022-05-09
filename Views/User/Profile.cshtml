@@ -60,7 +60,7 @@
             @if(!@item.Payed)
                 {
                     <a class="btn btn-danger">الغاء الحجز</a>
-                    <a asp-controller="Farm" asp-action="Pay" asp-all-route-id="@item.Id" class="btn btn-success">ادفع الان</a>
+                    <a asp-controller="Farm" asp-action="Pay" asp-route-id="@item.Id" class="btn btn-success">ادفع الان</a>
                 }
           </div>   
         </div>

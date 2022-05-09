@@ -1,24 +1,283 @@
-﻿<div class="landing">
+﻿@using System.Security.Claims
+@using Chaletin.Areas.Identity.Data
+@inject ChaletinDbContext _context
+@{
+    var isAdmin = _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
+}
+<style>
+    .progress {
+        width: 150px;
+        height: 150px;
+        background: none;
+        position: relative;
+    }
+
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #eee;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .progress > span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+
+        .progress .progress-left {
+            left: 0;
+        }
+
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 6px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+
+        .progress .progress-left .progress-bar {
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+
+        .progress .progress-right {
+            right: 0;
+        }
+
+            .progress .progress-right .progress-bar {
+                left: -100%;
+                border-top-left-radius: 80px;
+                border-bottom-left-radius: 80px;
+                border-right: 0;
+                -webkit-transform-origin: center right;
+                transform-origin: center right;
+            }
+
+        .progress .progress-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+</style>
+<div class="landing">
     <div class="overlay"></div>
     <div class="text">
         <div class="content">
-            <h2>
+            @if(isAdmin)
+            {
+                <h2>
 
-                <span class="checkin">احجز الآن</span>
-                <br>
-                شاليهك . مزرعتك . عرسك
-                <br>
+                    <span class="checkin">اعرض الآن</span>
+                    <br>
+                    شاليهك . مزرعتك
+                    <br>
 
-            </h2>
-            <p>
-                موقع إلكتروني متخصص بحجز الشاليهات و المزارع و قاعات الأفراح على مستوى المملكة ، أسرع طريقة للحصول على أفضل إختيار
-            </p>
+                </h2>
+                <p>
+                    موقع إلكتروني متخصص بحجز الشاليهات و المزارع على مستوى المملكة ، أسرع طريقة للتسويق لعقاراتك
+                </p>
+            }
+            @if(!isAdmin)
+            {
+                <h2>
+
+                    <span class="checkin">احجز الآن</span>
+                    <br>
+                    شاليهك . مزرعتك . عرسك
+                    <br>
+
+                </h2>
+                <p>
+                    موقع إلكتروني متخصص بحجز الشاليهات و المزارع و قاعات الأفراح على مستوى المملكة ، أسرع طريقة للحصول على أفضل إختيار
+                </p>
+            }
         </div>
     </div>
 </div>
-<section class="box ">
+<section class="box">
     <div class="container">
+        @if(isAdmin)
+        {
+            <h3 class="title">لوحة المعلومات</h3>
+            <div class="container py-5">
+                <div class="row">
 
+
+                    <div class="col-xl-3 col-lg-6 mb-4">
+                        <div class="bg-white rounded-lg p-5 shadow">
+                            <h2 class="h6 font-weight-bold text-center mb-4">المبلغ الإجمالي المقبوض</h2>
+                            <div class="progress mx-auto" data-value='50'>
+                                <span class="progress-left">
+                                    <span class="progress-bar border-primary"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar border-primary"></span>
+                                </span>
+                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="h2 font-weight-bold">80<sup class="small">%</sup></div>
+                                </div>
+                            </div>
+                            <!-- END -->
+                            <!-- Demo info -->
+                            @* <div class="row text-center mt-4">
+                                <div class="col-6 border-right">
+                                <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                                </div>
+                                <div class="col-6">
+                                <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                                </div>
+                                </div>*@
+                            <!-- END -->
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 mb-4">
+                        <div class="bg-white rounded-lg p-5 shadow">
+                            <h2 class="h6 font-weight-bold text-center mb-4">المزارع المعروضة</h2>
+
+                            <!-- Progress bar 2 -->
+                        <div class="progress mx-auto" data-value='25'>
+                                <span class="progress-left">
+                                    <span class="progress-bar border-danger"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar border-danger"></span>
+                                </span>
+                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                                </div>
+                            </div>
+                            <!-- END -->
+                            <!-- Demo info-->
+                            @* <div class="row text-center mt-4">
+                                <div class="col-6 border-right">
+                                <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                                </div>
+                                <div class="col-6">
+                                <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                                </div>
+                                </div>*@
+                            <!-- END -->
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 mb-4">
+                        <div class="bg-white rounded-lg p-5 shadow">
+                            <h2 class="h6 font-weight-bold text-center mb-4">المزارع الغير معروضة</h2>
+
+                            <!-- Progress bar 3 -->
+                        <div class="progress mx-auto" data-value='76'>
+                                <span class="progress-left">
+                                    <span class="progress-bar border-success"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar border-success"></span>
+                                </span>
+                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="h2 font-weight-bold">76<sup class="small">%</sup></div>
+                                </div>
+                            </div>
+                            <!-- END -->
+                            <!-- Demo info -->
+                       @* <div class="row text-center mt-4">
+                                <div class="col-6 border-right">
+                                    <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                                </div>
+                            </div>*@
+                            <!-- END -->
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 mb-4">
+                        <div class="bg-white rounded-lg p-5 shadow">
+                            <h2 class="h6 font-weight-bold text-center mb-4">مجموع المزارع المحجوزة</h2>
+
+                            <!-- Progress bar 4 -->
+                        <div class="progress mx-auto" data-value='12'>
+                                <span class="progress-left">
+                                    <span class="progress-bar border-warning"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar border-warning"></span>
+                                </span>
+                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="h2 font-weight-bold">12<sup class="small">%</sup></div>
+                                </div>
+                            </div>
+                            <!-- END -->
+                      @*      <!-- Demo info -->
+                        <div class="row text-center mt-4">
+                                <div class="col-6 border-right">
+                                    <div class="h4 font-weight-bold mb-0">28%</div><span class="small text-gray">Last week</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h4 font-weight-bold mb-0">60%</div><span class="small text-gray">Last month</span>
+                                </div>
+                            </div>*@
+                            <!-- END -->
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cards">
+                <div class="row">
+                    @foreach (var item in ViewBag.AdminFarms)
+                    {
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row ">
+
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@item.Title</h5>
+                                            <p class="card-text1">
+                                                @{
+                                                    for (int rate = 1; rate <= @item.Rate; rate++)
+                                                    {
+                                                        if (rate > 5)
+                                                        {
+                                                            break;
+                                                        }
+                                                        <i class="fas fa-star" style="color:yellow"></i>
+                                                    }
+                                                }
+                                            </p>
+                                            <p class="card-text2"> @item.City <i class="bi bi-geo-alt-fill"></i></p>
+                                            <p class="card-text3">@item.Price دينار/ليلة</p>
+                                            <div><a asp-controller="Farm" asp-action="Booking" asp-route-id="@item.Id" class="btn btn-success">احجز</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="~/Image/Chalets.jpg" alt="farm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        if(!isAdmin)
+        {
         <h3 class="title"> إبحث عن إختيارك </h3>
 
         <div class="row p-5">
@@ -55,6 +314,7 @@
         </div>
     </div>
 </section>
+        }
 <section class="service">
     <div class="container">
         <h3 class="title"> ماذا يميزنا ؟</h3>
@@ -88,3 +348,26 @@
         </div>
     </div>
 </section>
+<script>
+        $(function() {
+      $(".progress").each(function() {
+
+        var value = $(this).attr('data-value');
+        var left = $(this).find('.progress-left .progress-bar');
+        var right = $(this).find('.progress-right .progress-bar');
+
+        if (value > 0) {
+          if (value <= 50) {
+            right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+          } else {
+            right.css('transform', 'rotate(180deg)')
+            left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+          }
+        }
+      })
+
+      function percentageToDegrees(percentage) {
+        return percentage / 100 * 360
+      }
+    });
+</script>

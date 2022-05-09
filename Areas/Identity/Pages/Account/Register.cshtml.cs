@@ -104,6 +104,7 @@ namespace Chaletin.Areas.Identity.Pages.Account
             public string Name { get; set; }
             public string Phone { get; set; }
             public string Username { get; set; }
+            public bool IsAdmin { get; set; }
         }
 
 
@@ -127,6 +128,7 @@ namespace Chaletin.Areas.Identity.Pages.Account
                 user.Name = Input.Name;
                 user.Phone = Input.Phone;
                 user.UserName = Input.Username;
+               
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -145,6 +147,25 @@ namespace Chaletin.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+                    IdentityUserRole<string> role;
+                    if (Input.IsAdmin)
+                    {
+                        role = new()
+                        {
+                            UserId = userId,
+                            RoleId = "1"
+                        };
+                    }
+                    else
+                    {
+                        role = new()
+                        {
+                            UserId = userId,
+                            RoleId = "2"
+                        };
+                    }
+                    _context.UserRoles.Add(role);
+                    _context.SaveChanges();
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         //return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });

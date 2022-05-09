@@ -16,7 +16,7 @@ namespace Chaletin.Controllers
         public IActionResult Profile()
         {
             var userId = GetUserId();
-            var booking = _context.Booking.Where(x => x.UserId == userId).Include(x => x.Farm).ToList();
+            var booking = _context.Booking.Where(x => x.UserId == userId && !x.Disabled).Include(x => x.Farm).ToList();
             return View(booking);
         }
     }
