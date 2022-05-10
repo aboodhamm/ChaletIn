@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col">
                 <div class="content">
-
+                    <form asp-controller="Farm" asp-action="ConfirmPayment">
+                        @Html.HiddenFor(x=>x.Id)
                     <div class="title">
                         <h5> البطاقة  الإئتمانية</h5>
                     </div>
@@ -23,16 +24,16 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-lg-12">
                                         <label for="">رقم البطاقة</label>
-                                        <input type="text" name="" placeholder="0000 0000 0000 0000">
+                                        <input type="text" minlength="16" maxlength="16" required onkeypress="return validateNumber(event)" placeholder="0000 0000 0000 0000">
                                     </div>
                                     <div class="row expire">
                                         <div class="col-12 col-md-6 col-lg-6">
                                             <label for="">CVV </label>
-                                            <input type="text" name="" placeholder="000">
+                                            <input type="text" minlength="3" maxlength="3" required onkeypress="return validateNumber(event)" placeholder="000">
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
                                             <label for=""> تاريخ الإنتهاء</label>
-                                            <input type="text" name="" placeholder=" 00 / 00">
+                                            <input type="text" minlength="4" maxlength="4" onkeypress="return validateNumber(event)" required placeholder="MM/YY">
                                         </div>
                                     </div>
                                 </div>
@@ -40,11 +41,19 @@
                         </div>
                     </div>
                     <div class="pay">
-                        <p>المبلغ الكلي <h5> <span> دينار </span> @Model.TotalAmount </h5></p>
-                        <a class="btn btn-success" asp-controller="Farm" asp-action="ConfirmPayment" asp-route-id=@Model.Id>إدفع الآن  <i class="fa-solid fa-lock"></i></a>
+                        <p>المبلغ الكلي <h5><span> دينار </span> @Model.TotalAmount </h5></p>
+                        <button class="btn btn-success" type="submit">إدفع الآن</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+function validateNumber(e) {
+            const pattern = /^[0-9]$/;
+
+            return pattern.test(e.key)
+}
+</script>

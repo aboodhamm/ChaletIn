@@ -1,10 +1,13 @@
 ﻿@model Chaletin.Models.Model.FarmDetailsViewModel
 @using Microsoft.AspNetCore.Identity
 @using Chaletin.Areas.Identity.Data
+@using System.Security.Claims
+@inject ChaletinDbContext _context
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @{
     bool signIn = SignInManager.IsSignedIn(User);
+    var isAdmin = _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
 }
 <style>
 .img {
@@ -39,11 +42,8 @@
            <h3>  
             @Model.Title
           </h3>
-          <p>
-            <p class="card-text1">  التقييم   <span class="number1"> @Model.Rate </span> <img class="star" src="~/Image/star.png" alt=""></p>
-            <p class="card-text2"> @Model.City <i class="bi bi-geo-alt-fill"></i></p>
-          </p>
-          
+            <p class="card-text1"><span style="color:#ffc107">&#9733;</span> التقييم : @Model.Rate</p>
+            <p class="card-text2">المحافظة : @Model.City </p>
           </div>
         </div>
           </div>
@@ -76,9 +76,17 @@
                 <img src="~/Image/logout.png" alt="">
               </p>
             </div>
-
-           <a asp-controller="Farm" asp-action="Booking" asp-route-id="@Model.Id" class="btn btn-success">احجز</a>
-          
+            @if(!isAdmin)
+            {
+                @if(Model.Booked)
+                    {
+                        <div><a class="btn btn-success">محجوزة</a></div>
+                    }
+                    else
+                    {
+                        <a asp-controller="Farm" asp-action="Booking" asp-route-id="@Model.Id" class="btn btn-success">احجز</a>                   
+                    }
+            }
           </div> 
 
         </div>
@@ -89,7 +97,7 @@
         <div class="details">
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                @if(signIn)
+                @if(signIn && !isAdmin)
                 {
                     <button class="nav-link " id="nav-rate-tab" data-bs-toggle="tab" data-bs-target="#nav-rate" type="button" role="tab" aria-controls="nav-rate" aria-selected="true">التقييم </button>                
                 }
@@ -239,7 +247,7 @@
                     <p style="font-size:10px;float:left">@comment.CreatedDate.ToShortDateString() @comment.CreatedDate.ToShortTimeString()</p>
                     </div>
                 }
-               @if(signIn)
+               @if(signIn && !isAdmin)
                {
                 <form asp-controller="Farm" asp-action="AddComment">
                     <div class="comment">
@@ -250,7 +258,7 @@
                 </form>
                }
                         </div>
-               @if(signIn)
+               @if(signIn && !isAdmin)
                         {
                              <div class="tab-pane fade" id="nav-rate" role="tabpanel" aria-labelledby="nav-rate-tab">
              

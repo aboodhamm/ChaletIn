@@ -10,7 +10,7 @@
                     <div class="label">
                         <label>السعر لليوم</label>
                     </div>
-                    @Html.TextBoxFor(x => x.Price,new {disabled="true"})
+                    @Html.TextBoxFor(x => x.Price,new {disabled="true",@id="price"})
                 </div>
                  <div class="col-md-4">
                     <div class="label">
@@ -49,13 +49,13 @@
                     <div class="label">
                         <label>الى</label>
                     </div>
-                    <input type="date" name="To" />
+                    <input type="date" disabled required onchange="CalculatePriceAmount();GetMaxFromDate()" name="To" id="dateTo"/>
                 </div>
                  <div class="col-md-4">
                     <div class="label">
                         <label>من</label>
                     </div>
-                    <input type="date" name="From" />
+                    <input type="date" name="From" required onchange="CalculatePriceAmount();GetMinToDate()" id="dateFrom"/>
                 </div>
                <div class="col-md-4 form-check">
                    <div class="label">
@@ -77,15 +77,70 @@
                     <div class="label">
                         <label>السعر الكلي</label>
                     </div>
-                    @Html.TextBoxFor(x => x.BedRoomCount,new {disabled="true"})
+                    <input type="text" disabled id="totalAmount" />
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <p style="color:red;">عدم الدفع خلال 24 ساعة من الحجز يعتبر الحجز ملغي*</p>
+                    <p style="color:red;">@Model.ErrorMessage</p>
                 </div>
                     <input type="submit" class="btn btn-success" value="تأكيد الحجز" style="color:white;text-align: center;height: 50px;border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-top: 10px;border: 1px solid #ffc825;">
             </form>
         </div>
     </div>
 </div>
+<script>
+window.onload = function()
+{
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("dateFrom").min = today;
+};
+function GetMinToDate()
+{
+    debugger;
+    if (document.getElementById("dateFrom").value != "" )
+    {
+    var today = document.getElementById("dateFrom").valueAsDate;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("dateTo").min = today;
+    document.getElementById("dateTo").disabled = false;
+    }
+};
+function GetMaxFromDate()
+{
+    if (document.getElementById("dateTo").value != "" )
+    {
+    var today = document.getElementById("dateTo").valueAsDate;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("dateFrom").max = today;
+    }
+};
+function CalculatePriceAmount()
+{
+    if(document.getElementById("dateFrom").value != "" && document.getElementById("dateTo").value != "")
+    {
+    var dateFrom = document.getElementById("dateFrom").valueAsDate;
+    var dateTo = document.getElementById("dateTo").valueAsDate;
+    var period = getDifferenceInDays(dateFrom, dateTo);
+    var price = document.getElementById("price").value;
+    var totalAmount = price * period;
+    document.getElementById("totalAmount").value = totalAmount;
+    }
+};
+function getDifferenceInDays(date1, date2)
+{
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / (1000 * 60 * 60 * 24);
+};
+</script>

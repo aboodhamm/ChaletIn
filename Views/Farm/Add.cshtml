@@ -6,25 +6,24 @@
 
         <div class="form-contact">
             <form asp-controller="Farm" asp-action="AddFarm" class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 @*add-image*@">
                     <div class="label">
-                        <label>الإسم </label>
+                        <label for="">إضافة صور  العقار </label>
                     </div>
-                    @Html.TextBoxFor(x => x.Title)
+                    @*<input type="file" class="form-control-image" multiple required>*@
+                    @Html.TextBoxFor(x => x.ImageSource, new { type = "file",@required="required"})
                 </div>
                 <div class="col-md-4">
                     <div class="label">
                         <label>السعر </label>
                     </div>
-                    @Html.TextBoxFor(x => x.Price,new {@Type = "number"})
+                    @Html.TextBoxFor(x => x.Price,new {@Type = "number",@required="required"})
                 </div>
-                <div class="col-md-3 add-image">
+                <div class="col-md-4">
                     <div class="label">
-                        <label for="">إضافة صور  العقار </label>
+                        <label>الإسم </label>
                     </div>
-                    @*<input type="file" class="form-control-image" multiple required>*@
-                        @Html.TextBoxFor(x => x.ImageSource, new { type = "file" })
-
+                    @Html.TextBoxFor(x => x.Title)
                 </div>
                 <div class="col-md-2">
                     <div class="label">
@@ -62,23 +61,33 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                 <div class="col-md-2">
                     <div class="label">
-                        <label for="">  العقار </label>
+                        <label for="">السعة</label>
                     </div>
-                    <select class="form-select" name="Type" aria-label="Default select example" required>
-                        <option value="1">إستراحة / مزرعة </option>
-                        <option value="2">شاليه</option>
-                        <option value="3">شاليه, مزرعة / للأفراح </option>
+                    <select class="form-select" name="Capacity" aria-label="Default select example" required>
+                        <option value="10" selected>(0 - 10) أشخاص</option>
+                        <option value="20">(10 - 20) أشخاص</option>
+                        <option value="30">(20 - 30) أشخاص</option>
+                        <option value="31">( +30 ) شخص</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="label">
-                        <label for="">المحافظة </label>
+                        <label for="">العقار</label>
+                    </div>
+                    <select class="form-select" name="Type" aria-label="Default select example" required>
+                        <option value="1" selected>مزرعة</option>
+                        <option value="2">شاليه</option>
+                        <option value="3">مزرعة للأفراح</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="label">
+                        <label for="">المحافظة</label>
                     </div>
                     <select class="form-select" name="City" aria-label="Default select example" required>
-                        <option disabled selected>إختر المنطقة</option>
-                        <option value="1">عمان</option>
+                        <option value="1" selected>عمان</option>
                         <option value="2">الزرقاء</option>
                         <option value="3">إربد</option>
                         <option value="4">عجلون</option>
@@ -91,11 +100,47 @@
                         <option value="11">معان</option>
                     </select>
                 </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>وصف غرف النوم والأسرة</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.BedRoomDescription,new {@required="required"})
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>وصف المجالس</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.LivingRoomDescription,new {@required="required"})
+                </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>وصف المرافق العامة</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.PublicUtilityDescription,new {@required="required"})
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>وصف المسابح</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.SwimmingPoolDescription,new {@required="required"})
+                </div>
+                <div class="col-md-4">
+                    <div class="label">
+                        <label>وصف دورات المياه</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.BathRoomDescription,new {@required="required"})
+                </div>
+                 <div class="col-md-4">
+                    <div class="label">
+                        <label>وصف المطبخ</label>
+                    </div>
+                    @Html.TextBoxFor(x => x.KitchenDescription,new {@required="required"})
+                </div>
                 <div class="col-md-12">
                     <div class="label">
                         <label for="">وصف العقار</label>
                     </div>
-                    <textarea name="" id="" cols="30" rows="10" class="form-control" required></textarea>
+                    <textarea name="Description" id="" cols="30" rows="10" class="form-control" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <button class="btn btn-primary">إضافة</button>

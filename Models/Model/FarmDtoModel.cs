@@ -12,7 +12,14 @@ namespace Chaletin.Models.Model
         public int BedRoomCount { get; set; }
         public int BathRoomCount { get; set; }
         public string Description { get; set; }
+        public int Capacity { get; set; }
         public int Price { get; set; }
         public double Rate { get; set; }
+        public string LivingRoomDescription { get; set; }
+        public string SwimmingPoolDescription { get; set; }
+        public string BedRoomDescription { get; set; }
+        public string BathRoomDescription { get; set; }
+        public string KitchenDescription { get; set; }
+        public string PublicUtilityDescription { get; set; }
     }
 }

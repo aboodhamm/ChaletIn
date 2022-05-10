@@ -28,5 +28,6 @@ namespace Chaletin.Models.Model
         public string BathRoomDescription { get; set; }
         public string KitchenDescription { get; set; }
         public string PublicUtilityDescription { get; set; }
+        public bool Booked { get; set; }
     }
 }

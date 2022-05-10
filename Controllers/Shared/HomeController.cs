@@ -16,38 +16,16 @@ namespace Chaletin.Controllers
 
         public IActionResult Index()
         {
-            var userId = GetUserId();
-            var farms = _context.Farm.Where(x => x.UserId == userId).ToList();
-            ViewBag.AdminFarms = farms;
-            return View();
+            if (IsAdmin())
+                return RedirectToAction("AdminProfile", "Profile");
+            else
+                return View();
         }
         [Authorize]
         public IActionResult ContactUs()
         {
             return View();
         }
-        public IActionResult Farms(int type)
-        {
-            if(User.IsInRole("user"))
-            {
-
-            }
-            string imageSource = string.Empty;
-            switch (type)
-            {
-                case (int)FarmType.Farm:
-                    imageSource = Constants.FramUrl;
-                    break;
-                case (int)FarmType.Chalet:
-                    imageSource = Constants.ChaletUrl;
-                    break;
-                case (int)FarmType.Wedding:
-                    imageSource = Constants.WeddingUrl;
-                    break;
-
-            }
-            ViewBag.Image = imageSource;
-            return View();
-        }
+        
     }
 }

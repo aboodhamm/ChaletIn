@@ -16,8 +16,7 @@
     <div class="container">
         <form asp-controller="Farm" asp-action="Index">
         <div class="row">
-                    <input type="submit" class="btn btn-success" value="ابحث" style="height: 50px;border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-top: 10px;border: 1px solid #ffc825;">
-                <br />
+                <input type="text" name="type" style="display:none" value="@ViewBag.Type" />
                 <div class="col-md-3">
                     <div class="label">
                         <label for="">عدد غرف النوم </label>
@@ -68,6 +67,7 @@
                     </select>
                     <input type="text" style="visibility:hidden" name="imageSrc" value="@ViewBag.Image"/>
                 </div>
+                                    <input type="submit" class="btn btn-success" value="ابحث" style="border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-bottom:20px;border: 1px solid #ffc825;">
          </div>
         </form>
     </div>
@@ -99,7 +99,14 @@
                                     </p>
                                     <p class="card-text2"> @item.City <i class="bi bi-geo-alt-fill"></i></p>
                                     <p class="card-text3">@item.Price دينار/ليلة</p>
-                                    <div><a asp-controller="Farm" asp-action="Booking" asp-route-id="@item.Id" class="btn btn-success">احجز</a></div>
+                                    @if(item.Booked)
+                                    {
+                                        <div><a class="btn btn-success">محجوزة</a></div>
+                                    }
+                                    else
+                                    {
+                                        <div><a asp-controller="Farm" asp-action="Booking" asp-route-id="@item.Id" class="btn btn-success">احجز</a></div>   
+                                    }
                                 </div>
                             </div>
                             <div class="col-md-6">

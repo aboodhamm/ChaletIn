@@ -19,6 +19,20 @@ namespace Chaletin.Controllers
 
         public IActionResult Index(int type, string imageSrc, int bedRoomCount, int capacity, int price, int city)
         {
+            var farmsToCheck = _context.Booking.Include(x => x.Farm).OrderByDescending(x=>x.From).ToList();
+            var today = DateTime.Now;
+            foreach (var item in farmsToCheck)
+            {
+                int conflict = 0;
+                if (item.From <= today && item.To >= today)
+                    conflict++;
+                if (conflict == 0)
+                    item.Farm.Booked = false;
+                else
+                    item.Farm.Booked = true;
+                _context.SaveChanges();
+            }
+
             string imageSource = string.Empty;
             if (imageSrc is not null)
             {
@@ -41,11 +55,11 @@ namespace Chaletin.Controllers
                 }
             }
 
-            var farms = _context.Farm.Where(x => x.Type == type 
-                        //(bedRoomCount == 0 || x.BedRoomCount == bedRoomCount) &&
-                        //(capacity == 0 ? (capacity == 400 ? x.Capacity > 400 : x.Capacity > (capacity - 100) && x.Capacity <= capacity) : x.Capacity > 0) &&
-                        //(price == 0 ? (price == 400 ? x.Price > 400 : x.Price > (price - 100) && x.Price <= price) : x.Price > 0) &&
-                        //(city == 0 || x.City == city)
+            var farms = _context.Farm.Where(x => x.Type == type && x.Available &&
+                        (bedRoomCount != 0 ? x.BedRoomCount == bedRoomCount : x.BedRoomCount > 0) &&
+                        //((capacity != 0) ? (capacity > 30) ? (x.Capacity > 30) ? (capacity > 20 && capacity <= 30) : (x.Capacity > 20 && x.Capacity <= 30) ? (capacity> 10 && capacity <= 20) : (x.Capacity > 10 && x.Capacity <= 20) ? (capacity > 0 && capacity <= 10) : (x.Capacity > 0 && x.Capacity <= 10) : (x.Capacity > 0) &&
+                        //((price != 0) ? (price >= 300) ? (x.Price > 300) : (price > 100 && price <= 200) ? (x.Price > 100 && x.Price <= 200) : (price > 0 && price <= 100) ? (x.Price > 0 && x.Price <= 100) : (x.Price > 0) &&
+                        (city != 0 ? x.City == city : x.City > 0)
                         ).Select(x => new FarmViewModel
                         {
                             Id = x.Id,
@@ -58,7 +72,8 @@ namespace Chaletin.Controllers
                             BathRoomCount = x.BathRoomCount,
                             Description = x.Description,
                             Rate = x.Rate,
-                            Price = x.Price
+                            Price = x.Price,
+                            Booked = x.Booked
                         }).ToList();
 
             var City = Enum.GetValues(typeof(City)).Cast<City>().ToList();
@@ -71,6 +86,7 @@ namespace Chaletin.Controllers
             }
             ViewBag.Image = imageSource;
             ViewBag.Cities = cities;
+            ViewBag.Type = type;
             var UserRole = _context.UserRoles.Any(x => x.UserId == GetUserId());
             return View(farms);
         }
@@ -96,7 +112,8 @@ namespace Chaletin.Controllers
                 BedRoomDescription = farm.BedRoomDescription,
                 BathRoomDescription = farm.BathRoomDescription,
                 KitchenDescription = farm.KitchenDescription,
-                PublicUtilityDescription = farm.PublicUtilityDescription
+                PublicUtilityDescription = farm.PublicUtilityDescription,
+                Booked = farm.Booked
             };
             result.Comments = comments;
             return View(result);
@@ -115,6 +132,7 @@ namespace Chaletin.Controllers
 
             Farm farm = new()
             {
+                UserId = userId,
                 Title = model.Title,
                 Price = model.Price,
                 Rate = model.Rate,
@@ -125,7 +143,13 @@ namespace Chaletin.Controllers
                 BedRoomCount = model.BedRoomCount,
                 BathRoomCount = model.BathRoomCount,
                 Description = model.Description,
-                UserId = userId
+                PublicUtilityDescription = model.PublicUtilityDescription,
+                LivingRoomDescription = model.LivingRoomDescription,
+                BedRoomDescription = model.BedRoomDescription,  
+                BathRoomDescription= model.BathRoomDescription,
+                SwimmingPoolDescription = model.SwimmingPoolDescription,
+                KitchenDescription = model.KitchenDescription,
+                Available = true
             };
 
             _context.Farm.Add(farm);
@@ -134,7 +158,7 @@ namespace Chaletin.Controllers
         }
 
         [Authorize]
-        public IActionResult Booking(int id)
+        public IActionResult Booking(int id,string errorMessage = "")
         {
             var farm = _context.Farm.Find(id);
             var result = new BookingViewModel
@@ -149,7 +173,8 @@ namespace Chaletin.Controllers
                 BathRoomCount = farm.BathRoomCount,
                 Description = farm.Description,
                 Rate = farm.Rate,
-                Price = farm.Price
+                Price = farm.Price,
+                ErrorMessage = errorMessage
             };
             return View(result);
         }
@@ -157,6 +182,17 @@ namespace Chaletin.Controllers
         [Authorize]
         public IActionResult ConfirmBooking(BookingViewModel model)
         {
+            var existingBooking = _context.Booking.Where(x => x.FarmId == model.Id).ToList();
+            foreach(var item in existingBooking)
+            {
+                if ((model.From.Date <= item.From.Date && model.To.Date >= item.To.Date) || (model.From.Date >= item.From.Date && model.To.Date <= item.To.Date) ||
+                    (model.From.Date <= item.To.Date && model.To.Date >= item.To.Date) || (model.From.Date <= item.From.Date && model.To.Date >= model.From.Date))
+                {
+                    var errorMessage = "تاريخ الحجز غير متوفر*";
+                    return RedirectToAction("Booking", "Farm", new { model.Id,errorMessage });
+                }
+            }
+            
             var period = (model.To - model.From).Days;
             var totalAmount = period * model.Price;
             var userId = GetUserId();
@@ -169,15 +205,22 @@ namespace Chaletin.Controllers
                 From = model.From,
                 To = model.To,
                 Period = period,
-                Payed = model.PayLater,
+                Payed = !model.PayLater,
                 Disabled = false
             };
             model.TotalAmount = totalAmount;
+
+            if (model.From <= DateTime.Now && model.To >= DateTime.Now)
+            {
+                var farm = _context.Farm.Find(model.Id);
+                farm.Booked = true;
+            }
+            
             _context.Booking.Add(booking);
             _context.SaveChanges();
             if (model.PayLater)
             {
-                return RedirectToAction("Profile", "User");
+                return RedirectToAction("UserProfile", "Profile");
             }
             else
             {
@@ -207,7 +250,7 @@ namespace Chaletin.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("Profile", "User");
+            return RedirectToAction("UserProfile", "Profile");
         }
 
         [Authorize]
@@ -271,6 +314,16 @@ namespace Chaletin.Controllers
             farm.Rate = currentRate;
             _context.SaveChanges();
             return RedirectToAction("FarmDetails", "Farm", new { id = farmId });
+        }
+        public IActionResult ChangeAvailability(int id)
+        {
+            var farm = _context.Farm.Find(id);
+            if (farm.Available)
+                farm.Available = false;
+            else
+                farm.Available = true;
+            _context.SaveChanges();
+            return RedirectToAction("AdminProfile", "Profile");
         }
     }
 }

@@ -19,6 +19,10 @@ namespace Chaletin.Controllers
                 return user.Id;
             return string.Empty;
         }
+        protected bool IsAdmin()
+        {
+            return _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
+        }
         #endregion
     }
 }

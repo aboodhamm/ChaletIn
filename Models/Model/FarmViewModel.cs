@@ -20,5 +20,6 @@ namespace Chaletin.Models.Model
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public int TotalAmount { get; set; }
+        public bool Booked { get; set; }
     }
 }

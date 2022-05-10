@@ -21,6 +21,8 @@ namespace Chaletin.Areas.Identity.Data
         public string BathRoomDescription { get; set; }
         public string KitchenDescription { get; set; }
         public string  PublicUtilityDescription { get; set; }
+        public bool Available { get; set; }
+        public bool Booked { get; set; }
         public User User { get; set; }
         public List<Comments> Comments { get; set; }
     }
