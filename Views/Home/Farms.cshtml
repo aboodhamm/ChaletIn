@@ -1,166 +1,159 @@
 ﻿@model Chaletin.Models.Model.FarmDtoModel
-<div class="landing-farms" style="background-image:url('@ViewBag.Image')"> 
+<div class="landing-farms" style="background-image:url('@ViewBag.Image')">
     <div class="overlay"></div>
     <div class="text">
         <div class="content">
             <h1>
-              أفضل الإستراحات و المزارع
+                أفضل الإستراحات و المزارع
                 <br>
-            <span  class="checkin">احجز الآن</span>
-        </h1>
+                <span class="checkin">احجز الآن</span>
+            </h1>
         </div>
     </div>
-    </div>
-
-
-<!-- landing -->
-
-
-<!-- filter -->
-<div class="filter">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-md-3">
-        <div class="label"> 
-          <label for="">عدد غرف النوم </label>
-        </div>
-      <select class="form-select" aria-label="Default select example" required>
-        <option value="0" selected>الكل</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      </div>
-      <div class="col-md-3">
-      <div class="label"> 
-        <label for=""> السعة </label>
-    </div>
-    <select class="form-select" aria-label="Default select example" required>
-      <option value="0" selected> الكل </option>
-      <option value="1">  (0 - 10) أشخاص </option>
-      <option value="2">(10 - 20) أشخاص</option>
-      <option value="3">(20 - 30) أشخاص</option>
-      <option value="4">( +30 ) شخص</option>
-    </select>
-      </div>
-      <div class="col-md-3">
-        <div class="label"> 
-          <label for="">  السعر </label>
-      </div>
-      <select class="form-select" aria-label="Default select example" required>
-        <option value="0" selected>الكل</option>
-        <option value="1" > (0-100) دينار  </option>
-        <option value="2"> (100-200) دينار </option>
-        <option value="3"> (200-300) دينار </option>
-        <option value="4"> (+300) دينار </option>
-      </select>
-      </div>
-      <div class="col-md-3">
-        <div class="label"> 
-          <label for="">المحافظة </label>
-      </div>
-      <select class="form-select" aria-label="Default select example" required>
-        <option selected>إختر المنطقة</option>
-        <option value="1">عمان</option>
-        <option value="2">الزرقاء</option>
-        <option value="3">إربد</option>
-        <option value="4">عجلون</option>
-        <option value="5">جرش</option>
-        <option value="6">الكرك</option>
-        <option value="7">الطفيلة</option>
-        <option value="8">البلقاء</option>
-        <option value="9">المفرق</option>
-        <option value="10">العقبة</option>
-        <option value="11">معان</option>
-      </select> 
-      </div>
-      
-    </div>
-  </div>
 </div>
-<!-- filter -->
 
-<!-- cards -->
+<div class="filter">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="label">
+                    <label for="">عدد غرف النوم </label>
+                </div>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option value="0" selected>الكل</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="label">
+                    <label for=""> السعة </label>
+                </div>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option value="0" selected> الكل </option>
+                    <option value="1">  (0 - 10) أشخاص </option>
+                    <option value="2">(10 - 20) أشخاص</option>
+                    <option value="3">(20 - 30) أشخاص</option>
+                    <option value="4">( +30 ) شخص</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="label">
+                    <label for="">  السعر </label>
+                </div>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option value="0" selected>الكل</option>
+                    <option value="1"> (0-100) دينار  </option>
+                    <option value="2"> (100-200) دينار </option>
+                    <option value="3"> (200-300) دينار </option>
+                    <option value="4"> (+300) دينار </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="label">
+                    <label for="">المحافظة </label>
+                </div>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option selected>إختر المنطقة</option>
+                    <option value="1">عمان</option>
+                    <option value="2">الزرقاء</option>
+                    <option value="3">إربد</option>
+                    <option value="4">عجلون</option>
+                    <option value="5">جرش</option>
+                    <option value="6">الكرك</option>
+                    <option value="7">الطفيلة</option>
+                    <option value="8">البلقاء</option>
+                    <option value="9">المفرق</option>
+                    <option value="10">العقبة</option>
+                    <option value="11">معان</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <div class="cards">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="card mb-3" >
+                <div class="card mb-3">
                     <div class="row ">
 
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h5 class="card-title">@Model.Title</h5>
-                          <p class="card-text1">  التقييم   <span class="number1"> 9.4 </span> <img class="star" src="~/Image/star.png" alt=""></p>
-                          <p class="card-text2"> عمان - طريق المطار <i class="bi bi-geo-alt-fill"></i></p>
-                          <p class="card-text3">  دينار /ليلة <span class="number2">250</span> </p>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Title</h5>
+                                <p class="card-text1">  التقييم   <span class="number1"> 9.4 </span> <img class="star" src="~/Image/star.png" alt=""></p>
+                                <p class="card-text2"> عمان - طريق المطار <i class="bi bi-geo-alt-fill"></i></p>
+                                <p class="card-text3">  دينار /ليلة <span class="number2">250</span> </p>
+                            </div>
                         </div>
-                      </div>
 
                         <div class="col-md-6">
-                          <a href=""><img class="image-farm card-img" src="html/image farms/farm 2/1.png" alt="farm"></a>
+                            <a href=""><img class="image-farm card-img" src="html/image farms/farm 2/1.png" alt="farm"></a>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="card mb-3" >
+                <div class="card mb-3">
                     <div class="row ">
 
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h5 class="card-title">مزرعة بمسطحات خضراء</h5>
-                          <p class="card-text1">  التقييم   <span class="number1"> 8.6 </span> <img class="star" src="~/Image/star.png" alt=""></p>
-                          <p class="card-text2"> الزرقاء - بيرين <i class="bi bi-geo-alt-fill"></i></p>
-                          <p class="card-text3">  دينار /ليلة <span class="number2">180</span> </p>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">مزرعة بمسطحات خضراء</h5>
+                                <p class="card-text1">  التقييم   <span class="number1"> 8.6 </span> <img class="star" src="~/Image/star.png" alt=""></p>
+                                <p class="card-text2"> الزرقاء - بيرين <i class="bi bi-geo-alt-fill"></i></p>
+                                <p class="card-text3">  دينار /ليلة <span class="number2">180</span> </p>
+                            </div>
                         </div>
-                      </div>
 
                         <div class="col-md-6">
-                          <a href=""><img class="image-farm" src="html/image farms/farm 1/2.jpeg" class="card-img" alt="..."></a>
+                            <a href=""><img class="image-farm" src="html/image farms/farm 1/2.jpeg" class="card-img" alt="..."></a>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="card mb-3" >
+                <div class="card mb-3">
                     <div class="row ">
 
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h5 class="card-title">مزرعة بجلسات ومسطح اخضر</h5>
-                          <p class="card-text1">  التقييم   <span class="number1"> 9.3 </span> <img class="star" src="~/Image/star.png" alt=""></p>
-                          <p class="card-text2"> عمان - البحر الميت <i class="bi bi-geo-alt-fill"></i></p>
-                          <p class="card-text3">  دينار /ليلة <span class="number2">320</span> </p>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">مزرعة بجلسات ومسطح اخضر</h5>
+                                <p class="card-text1">  التقييم   <span class="number1"> 9.3 </span> <img class="star" src="~/Image/star.png" alt=""></p>
+                                <p class="card-text2"> عمان - البحر الميت <i class="bi bi-geo-alt-fill"></i></p>
+                                <p class="card-text3">  دينار /ليلة <span class="number2">320</span> </p>
+                            </div>
                         </div>
-                      </div>
 
                         <div class="col-md-6">
-                          <a href=""><img class="image-farm" src="html/image farms/farm 4/1.jpeg" class="card-img" alt="..."></a>
+                            <a href=""><img class="image-farm" src="html/image farms/farm 4/1.jpeg" class="card-img" alt="..."></a>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="card mb-3" >
+                <div class="card mb-3">
                     <div class="row ">
 
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h5 class="card-title">مزرعة بمسطح اخضر وبحيرة</h5>
-                          <p class="card-text1">  التقييم   <span class="number1"> 8.9 </span> <img class="star" src="~/Image/star.png" alt=""></p>
-                          <p class="card-text2"> البلقاء - السلط <i class="bi bi-geo-alt-fill"></i></p>
-                          <p class="card-text3">  دينار /ليلة <span class="number2">160</span> </p>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">مزرعة بمسطح اخضر وبحيرة</h5>
+                                <p class="card-text1">  التقييم   <span class="number1"> 8.9 </span> <img class="star" src="~/Image/star.png" alt=""></p>
+                                <p class="card-text2"> البلقاء - السلط <i class="bi bi-geo-alt-fill"></i></p>
+                                <p class="card-text3">  دينار /ليلة <span class="number2">160</span> </p>
+                            </div>
                         </div>
-                      </div>
 
                         <div class="col-md-6">
-                          <a href=""><img class="image-farm" src="html/image farms/farm 3/1.png" class="card-img" alt="..."></a>
+                            <a href=""><img class="image-farm" src="html/image farms/farm 3/1.png" class="card-img" alt="..."></a>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>

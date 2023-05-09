@@ -11,6 +11,8 @@ public class User : IdentityUser
     public string Name { get; set; }
     public string Phone { get; set; }
     public List<Farm> Farms { get; set; }
-    public List<Comments> Comments{ get; set; }
+    public List<Comments> Comments { get; set; }
+    public List<ContactMessage> ContactMessages { get; set; }
+    public bool Blocked { get; set; }
 }
 

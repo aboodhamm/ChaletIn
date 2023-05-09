@@ -23,6 +23,8 @@
                     <input type="text" disabled value="@item.To.ToShortDateString()" name="From" id="From">
                     <h5>عدد الليالي</h5>
                     <p>@item.Period</p>
+                    <h5>هاتف المالك</h5>
+                    <p>@item.Farm.User.Phone</p>
                     </div>
 
             <div class="times">
@@ -57,16 +59,14 @@
             </div>
             @if(!@item.Payed)
                 {
-                    <a class="btn btn-danger">الغاء الحجز</a>
+                    <a asp-controller="Farm" asp-action="DisableBooking" asp-route-id="@item.Id" class="btn btn-danger">الغاء الحجز</a>
                     <a asp-controller="Farm" asp-action="Pay" asp-route-id="@item.Id" class="btn btn-success">ادفع الان</a>
+                                }
+                  </div>   
+                </div>
+                  </div>
                 }
-          </div>   
-        </div>
-          </div>
-                    }
-                    }
-                               
-    
+            }
     </div>
   </div>
 </div>

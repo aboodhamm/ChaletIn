@@ -1,17 +1,19 @@
 ﻿@model Chaletin.Models.Model.FarmDtoModel
+@{
+    var isBlocked = ViewBag.User;
+}
 <div class="contact">
     <div class="container">
 
         <h3 class="title">  أضف عقارك  </h3>
 
         <div class="form-contact">
-            <form asp-controller="Farm" asp-action="AddFarm" class="row">
+            <form asp-controller="Farm" asp-action="AddFarm" enctype="multipart/form-data" class="row">
                 <div class="col-md-4 @*add-image*@">
                     <div class="label">
                         <label for="">إضافة صور  العقار </label>
                     </div>
-                    @*<input type="file" class="form-control-image" multiple required>*@
-                    @Html.TextBoxFor(x => x.ImageSource, new { type = "file",@required="required"})
+                    <input asp-for="ImagesFiles" multiple class="form-control-image" required>
                 </div>
                 <div class="col-md-4">
                     <div class="label">
@@ -23,7 +25,7 @@
                     <div class="label">
                         <label>الإسم </label>
                     </div>
-                    @Html.TextBoxFor(x => x.Title)
+                    @Html.TextBoxFor(x => x.Title, new {@required="required"})
                 </div>
                 <div class="col-md-2">
                     <div class="label">
@@ -61,7 +63,7 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                 <div class="col-md-2">
+                <div class="col-md-2">
                     <div class="label">
                         <label for="">السعة</label>
                     </div>
@@ -106,7 +108,7 @@
                     </div>
                     @Html.TextBoxFor(x => x.BedRoomDescription,new {@required="required"})
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>وصف المجالس</label>
                     </div>
@@ -118,7 +120,7 @@
                     </div>
                     @Html.TextBoxFor(x => x.PublicUtilityDescription,new {@required="required"})
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>وصف المسابح</label>
                     </div>
@@ -130,7 +132,7 @@
                     </div>
                     @Html.TextBoxFor(x => x.BathRoomDescription,new {@required="required"})
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>وصف المطبخ</label>
                     </div>
@@ -143,7 +145,14 @@
                     <textarea name="Description" id="" cols="30" rows="10" class="form-control" required></textarea>
                 </div>
                 <div class="col-md-12">
-                    <button class="btn btn-primary">إضافة</button>
+                    @if (isBlocked)
+                    {
+                        <button class="btn btn-danger" disabled>حسابك معطل، لا يمكنك اضافة عقار</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary">إضافة</button>
+                    }
                 </div>
             </form>
         </div>

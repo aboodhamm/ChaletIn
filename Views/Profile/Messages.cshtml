@@ -1,0 +1,24 @@
+﻿@model List<Chaletin.Areas.Identity.Data.ContactMessage>
+<div class="container">
+    <table class="table table-sm table-hover" style="margin-top:5%">
+        <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>phone number</th>
+            <th>email</th>
+            <th>subject</th>
+            <th>message</th>
+        </tr>
+        @foreach(var message in @Model)
+        {
+            <tr>
+                <td>@message.User.Id</td>
+                <td>@message.User.Name</td>
+                <td>@message.User.Phone</td>
+                <td>@message.User.Email</td>
+                <td>@message.Subject</td>
+                <td>@message.Message</td>
+            </tr>
+        }
+    </table>
+</div>

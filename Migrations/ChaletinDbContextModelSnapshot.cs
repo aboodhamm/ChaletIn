@@ -30,6 +30,9 @@ namespace Chaletin.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("BookedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
@@ -95,6 +98,30 @@ namespace Chaletin.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Chaletin.Areas.Identity.Data.ContactMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ContactMessage");
+                });
+
             modelBuilder.Entity("Chaletin.Areas.Identity.Data.Farm", b =>
                 {
                     b.Property<int>("Id")
@@ -118,6 +145,9 @@ namespace Chaletin.Migrations
                     b.Property<string>("BedRoomDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("Booked")
                         .HasColumnType("bit");
 
@@ -128,6 +158,9 @@ namespace Chaletin.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Images")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KitchenDescription")
@@ -174,6 +207,9 @@ namespace Chaletin.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -409,6 +445,15 @@ namespace Chaletin.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Chaletin.Areas.Identity.Data.ContactMessage", b =>
+                {
+                    b.HasOne("Chaletin.Areas.Identity.Data.User", "User")
+                        .WithMany("ContactMessages")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Chaletin.Areas.Identity.Data.Farm", b =>
                 {
                     b.HasOne("Chaletin.Areas.Identity.Data.User", "User")
@@ -477,6 +522,8 @@ namespace Chaletin.Migrations
             modelBuilder.Entity("Chaletin.Areas.Identity.Data.User", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("ContactMessages");
 
                     b.Navigation("Farms");
                 });

@@ -1,0 +1,20 @@
+﻿@model List<Chaletin.Areas.Identity.Data.User>
+<div class="container">
+    <table class="table table-sm table-hover" style="margin-top:5%">
+        <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>phone number</th>
+            <th>email</th>
+        </tr>
+        @foreach(var user in @Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Phone</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </table>
+</div>

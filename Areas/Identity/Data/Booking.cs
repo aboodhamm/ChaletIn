@@ -12,6 +12,7 @@
         public DateTime To { get; set; }
         public bool Payed { get; set; }
         public bool Disabled { get; set; }
+        public DateTime BookedDate { get; set; }
         public User User { get; set; }
         public Farm Farm { get; set; }
     }

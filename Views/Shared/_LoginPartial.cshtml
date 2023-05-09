@@ -5,12 +5,12 @@
 @inject UserManager<User> UserManager
 @inject ChaletinDbContext _context
 @{
-    var isAdmin = _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault()); 
+    var isUser = _context.UserRoles.Where(x => x.RoleId != "1" && x.RoleId != "2").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault()); 
 }
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        @if (!isAdmin)
+        @if (isUser)
         {
             <li class="nav-item">
                 <a id="manage" class="nav-link" style="color:(255,255,255,.55)" asp-controller="Profile" asp-action="UserProfile">حجوراتي</a>
@@ -28,12 +28,6 @@
             <a id="login" asp-area="Identity" asp-page="/Account/Login">
                 <p>تسجيل الدخول <img src="~/Image/user (1).png" alt=""> </p>
             </a>
-        </li>@*
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>*@
     }
 </ul>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Chaletin.Migrations
 {
-    public partial class initial : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace Chaletin.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Blocked = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -157,21 +158,52 @@ namespace Chaletin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ContactMessage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactMessage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ContactMessage_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Farm",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageSource = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<int>(type: "int", nullable: false),
+                    Images = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LivingRoomCount = table.Column<int>(type: "int", nullable: false),
                     BedRoomCount = table.Column<int>(type: "int", nullable: false),
                     BathRoomCount = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rate = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Rate = table.Column<double>(type: "float", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    LivingRoomDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SwimmingPoolDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BedRoomDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BathRoomDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KitchenDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicUtilityDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Available = table.Column<bool>(type: "bit", nullable: false),
+                    Booked = table.Column<bool>(type: "bit", nullable: false),
+                    Blocked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,6 +213,66 @@ namespace Chaletin.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<int>(type: "int", nullable: false),
+                    Period = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    FarmId = table.Column<int>(type: "int", nullable: false),
+                    From = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    To = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Payed = table.Column<bool>(type: "bit", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: false),
+                    BookedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Booking_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Booking_Farm_FarmId",
+                        column: x => x.FarmId,
+                        principalTable: "Farm",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FarmId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comments_Farm_FarmId",
+                        column: x => x.FarmId,
+                        principalTable: "Farm",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -223,6 +315,31 @@ namespace Chaletin.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Booking_FarmId",
+                table: "Booking",
+                column: "FarmId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Booking_UserId",
+                table: "Booking",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_FarmId",
+                table: "Comments",
+                column: "FarmId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContactMessage_UserId",
+                table: "ContactMessage",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Farm_UserId",
                 table: "Farm",
                 column: "UserId");
@@ -246,10 +363,19 @@ namespace Chaletin.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Farm");
+                name: "Booking");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "ContactMessage");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Farm");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

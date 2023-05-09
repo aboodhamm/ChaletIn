@@ -153,7 +153,7 @@ namespace Chaletin.Areas.Identity.Pages.Account
                         role = new()
                         {
                             UserId = userId,
-                            RoleId = "1"
+                            RoleId = "2"
                         };
                     }
                     else
@@ -161,7 +161,7 @@ namespace Chaletin.Areas.Identity.Pages.Account
                         role = new()
                         {
                             UserId = userId,
-                            RoleId = "2"
+                            RoleId = "3"
                         };
                     }
                     _context.UserRoles.Add(role);

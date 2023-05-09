@@ -1,4 +1,68 @@
-﻿@model Chaletin.Models.Model.BookingViewModel
+﻿@using Chaletin.Models.Model
+@model Chaletin.Models.Model.BookingViewModel
+<style>
+    .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        .popup .popuptext {
+            visibility: hidden;
+            background-color: white;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+            border: 1px solid black;
+        }
+
+            .popup .popuptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+
+    @@-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+</style>
 <div class="contact">
     <div class="container">
         <h3 class="title">تأكيد الحجز</h3>
@@ -12,7 +76,7 @@
                     </div>
                     @Html.TextBoxFor(x => x.Price,new {disabled="true",@id="price"})
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>المحافظة </label>
                     </div>
@@ -31,7 +95,7 @@
                     </div>
                     @Html.TextBoxFor(x => x.BathRoomCount,new {disabled="true"})
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>عدد المجالس </label>
                     </div>
@@ -43,34 +107,34 @@
                     </div>
                     @Html.TextBoxFor(x => x.BedRoomCount,new {disabled="true"})
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>الى</label>
                     </div>
-                    <input type="date" disabled required onchange="CalculatePriceAmount();GetMaxFromDate()" name="To" id="dateTo"/>
+                    <input type="date" disabled required onchange="CalculatePriceAmount();GetMaxFromDate()" name="To" id="dateTo" />
                 </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="label">
                         <label>من</label>
                     </div>
-                    <input type="date" name="From" required onchange="CalculatePriceAmount();GetMinToDate()" id="dateFrom"/>
+                    <input type="date" name="From" required onchange="CalculatePriceAmount();GetMinToDate()" id="dateFrom" />
                 </div>
-               <div class="col-md-4 form-check">
-                   <div class="label">
+                <div class="col-md-4 form-check">
+                    <div class="label">
                         <label class="form-check-label">
-                        الدفع لاحقاً
-                    </label>
-                   </div>
+                            الدفع لاحقاً
+                        </label>
+                    </div>
                     @Html.RadioButtonFor(x => x.PayLater,"true",new {@class = "form-check-input"})
                 </div>
                 <div class="col-md-4 form-check">
-                   <div class="label">
+                    <div class="label">
                         <label class="form-check-label">
-                        الدفع الان
-                    </label>
-                   </div>
+                            الدفع الان
+                        </label>
+                    </div>
                     @Html.RadioButtonFor(x => x.PayLater,"false",new {@class = "form-check-input"})
                 </div>
                 <div class="col-md-4">
@@ -82,65 +146,92 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <p style="color:red;">عدم الدفع خلال 24 ساعة من الحجز يعتبر الحجز ملغي*</p>
-                    <p style="color:red;">@Model.ErrorMessage</p>
+                    <p style="color:red;float:right">عدم الدفع خلال 24 ساعة من الحجز يعتبر الحجز ملغي*</p>
+                    <p style="color:red;float:right">@Model.ErrorMessage</p>
+                    @if (@Model.ErrorMessage.Length > 0)
+                    {
+                        <br />
+                        <div class="popup" onclick="myFunction()" style="color:mediumblue">
+                            إضغط هنا لعرض حجوزات العقار
+                            <span class="popuptext" id="myPopup">
+                                <table class="table">
+                                    <tr>
+                                        <th>الى</th>
+                                        <th>من</th>
+                                    </tr>
+                                    @foreach (var booking in (List<FarmBookingDetails>)ViewBag.FarmBookingDetails)
+                                    {
+                                        <tr>
+                                            <td>@booking.To.ToShortDateString()</td>
+                                            <td>@booking.From.ToShortDateString()</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </span>
+                        </div>
+                    }
                 </div>
-                    <input type="submit" class="btn btn-success" value="تأكيد الحجز" style="color:white;text-align: center;height: 50px;border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-top: 10px;border: 1px solid #ffc825;">
+                <input type="submit" class="btn btn-success" value="تأكيد الحجز" style="color:white;text-align: center;height: 50px;border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-top: 10px;border: 1px solid #ffc825;">
             </form>
         </div>
     </div>
 </div>
 <script>
-window.onload = function()
-{
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("dateFrom").min = today;
-};
-function GetMinToDate()
-{
-    debugger;
-    if (document.getElementById("dateFrom").value != "" )
+    window.onload = function()
     {
-    var today = document.getElementById("dateFrom").valueAsDate;
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("dateTo").min = today;
-    document.getElementById("dateTo").disabled = false;
-    }
-};
-function GetMaxFromDate()
-{
-    if (document.getElementById("dateTo").value != "" )
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("dateFrom").min = today;
+    };
+    function GetMinToDate()
     {
-    var today = document.getElementById("dateTo").valueAsDate;
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("dateFrom").max = today;
-    }
-};
-function CalculatePriceAmount()
-{
-    if(document.getElementById("dateFrom").value != "" && document.getElementById("dateTo").value != "")
+        debugger;
+        if (document.getElementById("dateFrom").value != "" )
+        {
+        var today = document.getElementById("dateFrom").valueAsDate;
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("dateTo").min = today;
+        document.getElementById("dateTo").disabled = false;
+        }
+    };
+    function GetMaxFromDate()
     {
-    var dateFrom = document.getElementById("dateFrom").valueAsDate;
-    var dateTo = document.getElementById("dateTo").valueAsDate;
-    var period = getDifferenceInDays(dateFrom, dateTo);
-    var price = document.getElementById("price").value;
-    var totalAmount = price * period;
-    document.getElementById("totalAmount").value = totalAmount;
+        if (document.getElementById("dateTo").value != "" )
+        {
+        var today = document.getElementById("dateTo").valueAsDate;
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("dateFrom").max = today;
+        }
+    };
+    function CalculatePriceAmount()
+    {
+        if(document.getElementById("dateFrom").value != "" && document.getElementById("dateTo").value != "")
+        {
+        var dateFrom = document.getElementById("dateFrom").valueAsDate;
+        var dateTo = document.getElementById("dateTo").valueAsDate;
+        var period = getDifferenceInDays(dateFrom, dateTo);
+        var price = document.getElementById("price").value;
+        var totalAmount = price * period;
+        document.getElementById("totalAmount").value = totalAmount;
+        }
+    };
+    function getDifferenceInDays(date1, date2)
+    {
+        const diffInMs = Math.abs(date2 - date1);
+        return diffInMs / (1000 * 60 * 60 * 24);
+    };
+
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
     }
-};
-function getDifferenceInDays(date1, date2)
-{
-    const diffInMs = Math.abs(date2 - date1);
-    return diffInMs / (1000 * 60 * 60 * 24);
-};
 </script>

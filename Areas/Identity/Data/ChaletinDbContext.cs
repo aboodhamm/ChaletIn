@@ -14,12 +14,15 @@ public class ChaletinDbContext : IdentityDbContext<User>
     public DbSet<Farm> Farm { get; set; }
     public DbSet<Booking> Booking{ get; set; }
     public DbSet<Comments> Comments { get; set; }
+    public DbSet<ContactMessage> ContactMessage { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+        builder.Entity<Farm>()
+            .Property(e => e.Images)
+            .HasConversion(
+                v => string.Join(',', v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
     }
 }

@@ -7,7 +7,7 @@ namespace Chaletin.Models.Model
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string ImageSource { get; set; }
+        public List<string> Images { get; set; }
         public FarmType Type { get; set; }
         public City City { get; set; }
         public int LivingRoomCount { get; set; }

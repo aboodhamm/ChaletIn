@@ -1,11 +1,11 @@
 ﻿@using Chaletin.Models.Enum
 @model List<Chaletin.Models.Model.FarmViewModel>
-<div class="landing-farms" style="background-image:url('@ViewBag.Image')">
+<div class="landing-farms" style="background-image:url('@ViewBag.PageComponent.Image')">
     <div class="overlay"></div>
     <div class="text">
         <div class="content">
             <h1>
-                أفضل الإستراحات و المزارع
+                @ViewBag.PageComponent.Title
                 <br>
                 <span class="checkin">احجز الآن</span>
             </h1>
@@ -15,8 +15,8 @@
 <div class="filter">
     <div class="container">
         <form asp-controller="Farm" asp-action="Index">
-        <div class="row">
-                <input type="text" name="type" style="display:none" value="@ViewBag.Type" />
+            <div class="row">
+                <input type="text" name="type" style="display:none" value="@ViewBag.PageComponent.Type" />
                 <div class="col-md-3">
                     <div class="label">
                         <label for="">عدد غرف النوم </label>
@@ -60,20 +60,18 @@
                     </div>
                     <select class="form-select" name="City" aria-label="Default select example">
                         <option value="0">الكل</option>
-                        @foreach (var item in (Dictionary<int,string>)ViewBag.Cities)
+                        @foreach (var item in ViewBag.PageComponent.City)
                         {
                             <option value="@item.Key">@item.Value</option>
                         }
                     </select>
-                    <input type="text" style="visibility:hidden" name="imageSrc" value="@ViewBag.Image"/>
+                    <input type="text" style="visibility:hidden" name="imageSrc" value="@ViewBag.Image" />
                 </div>
-                                    <input type="submit" class="btn btn-success" value="ابحث" style="border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-bottom:20px;border: 1px solid #ffc825;">
-         </div>
+                <input type="submit" class="btn btn-success" value="ابحث" style="border-radius: 30px;font-size: 18px;font-family: 'Tajawal', sans-serif;font-weight: bold;margin-bottom:20px;border: 1px solid #ffc825;">
+            </div>
         </form>
     </div>
 </div>
-<!-- filter -->
-<!-- cards -->
 <div class="cards">
     <div class="container">
         <div class="row">
@@ -99,18 +97,11 @@
                                     </p>
                                     <p class="card-text2"> @item.City <i class="bi bi-geo-alt-fill"></i></p>
                                     <p class="card-text3">@item.Price دينار/ليلة</p>
-                                    @if(item.Booked)
-                                    {
-                                        <div><a class="btn btn-success">محجوزة</a></div>
-                                    }
-                                    else
-                                    {
-                                        <div><a asp-controller="Farm" asp-action="Booking" asp-route-id="@item.Id" class="btn btn-success">احجز</a></div>   
-                                    }
+                                    <div><a asp-controller="Farm" asp-action="Booking" asp-route-id="@item.Id" class="btn btn-success">احجز</a></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id"><img src="~/Image/Chalets.jpg" alt="farm"></a>
+                                <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id"><img src="~/FarmImages/@item.Images[0]" style="width:100%!important;height:300px!important" alt="farm"></a>
                             </div>
                         </div>
                     </div>

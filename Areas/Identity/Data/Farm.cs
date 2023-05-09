@@ -7,6 +7,7 @@ namespace Chaletin.Areas.Identity.Data
         public string Title { get; set; }
         public int Type { get; set; }
         public int City { get; set; }
+        public string[] Images { get; set; }
         public int LivingRoomCount { get; set; }
         public int BedRoomCount { get; set; }
         public int BathRoomCount { get; set; }
@@ -23,6 +24,7 @@ namespace Chaletin.Areas.Identity.Data
         public string  PublicUtilityDescription { get; set; }
         public bool Available { get; set; }
         public bool Booked { get; set; }
+        public bool Blocked { get; set; }
         public User User { get; set; }
         public List<Comments> Comments { get; set; }
     }

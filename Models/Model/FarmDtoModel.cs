@@ -1,11 +1,13 @@
 ﻿using Chaletin.Models.Enum;
+using Microsoft.AspNetCore.Http;
 
 namespace Chaletin.Models.Model
 {
     public class FarmDtoModel
     {
         public string Title { get; set; }
-        public string ImageSource { get; set; }
+        public List<string> Images { get; set; }
+        public List<IFormFile> ImagesFiles { get; set; }
         public FarmType Type { get; set; }
         public City City { get; set; }
         public int LivingRoomCount { get; set; }

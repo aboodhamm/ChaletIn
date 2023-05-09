@@ -1,0 +1,166 @@
+﻿@model Chaletin.Models.Model.AdminStatistics
+@using System.Security.Claims
+@using Chaletin.Areas.Identity.Data
+@inject ChaletinDbContext _context
+@{
+    var TotalAvailableFarmsAvg = @Model.TotalAvailableFarms / @Model.TotalFarms * 100;
+    var TotalNotAvailableFarmsAvg = @Model.TotalNotAvailableFarms / @Model.TotalFarms * 100;
+    var TotalPayedAmountAvg = Model.TotalPayedAmount / 0.01 * 100;
+    var TotalBookedFarmsAvg = Model.TotalBookedFarms / @Model.TotalFarms * 100;
+    var isBlocked = ViewBag.User;
+}
+<style>
+    .progress {
+        width: 150px;
+        height: 150px;
+        background: none;
+        position: relative;
+    }
+
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #eee;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .progress > span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+
+        .progress .progress-left {
+            left: 0;
+        }
+
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 6px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+
+        .progress .progress-left .progress-bar {
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+
+        .progress .progress-right {
+            right: 0;
+        }
+
+            .progress .progress-right .progress-bar {
+                left: -100%;
+                border-top-left-radius: 80px;
+                border-bottom-left-radius: 80px;
+                border-right: 0;
+                -webkit-transform-origin: center right;
+                transform-origin: center right;
+            }
+
+        .progress .progress-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+</style>
+<div class="container">
+    <div class="container py-5">
+        <div class="row">
+
+
+            <div class="col-xl-3 col-lg-6 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">مجموع المزارع</h2>
+                    <div class="progress mx-auto" data-value='@*TotalPayedAmountAvg*@'>
+                        <span class="progress-left">
+                            <span class="progress-bar border-primary"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar border-primary"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">@Model.TotalPayedAmount<sup class="small">JD</sup></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">المزارع الغير معروضة</h2>
+
+                    <!-- Progress bar 2 -->
+                    <div class="progress mx-auto" data-value='@*@TotalNotAvailableFarmsAvg*@'>
+                        <span class="progress-left">
+                            <span class="progress-bar border-danger"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar border-danger"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">@Model.TotalNotAvailableFarms<sup class="small"></sup></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">المزارع المعروضة</h2>
+
+                    <!-- Progress bar 3 -->
+                    <div class="progress mx-auto" data-value='@*@TotalAvailableFarmsAvg*@'>
+                        <span class="progress-left">
+                            <span class="progress-bar border-success"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar border-success"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">@Model.TotalAvailableFarms<sup class="small"></sup></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">مجموع المزارع المحجوزة</h2>
+
+                    <!-- Progress bar 4 -->
+                    <div class="progress mx-auto" data-value='@*@TotalBookedFarmsAvg*@'>
+                        <span class="progress-left">
+                            <span class="progress-bar border-warning"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar border-warning"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">@Model.TotalBookedFarms<sup class="small"></sup></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@
 @inject UserManager<User> UserManager
 @{
     bool signIn = SignInManager.IsSignedIn(User);
-    var isAdmin = _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
+    var isUser = _context.UserRoles.Where(x => x.RoleId == "3").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
 }
 <style>
 .img {
@@ -16,23 +16,22 @@
   max-width: 28%!important;
 }
 </style>
+@if(Model.Images is not null && Model.Images.Count > 0)
+{
 <div class="gallery">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
-                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
-                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
-                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
-                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
-                    <img class="img" src="~/Image/farm.png" alt="Pineapple" width="300" height="300">
+                @foreach(var images in Model.Images)
+                {
+                    <img class="img" src="~/FarmImages/@images" alt="Pineapple" style="width:100%!important;height:100%!important">    
+                }
             </div>
         </div>
     </div>
-</div>
-<!-- gallery -->
+</div>    
+}
 
-<!-- details -->
 <div class="check">
   <div class="container">
       <div class="row">
@@ -60,8 +59,6 @@
 
                 <span> دينار/ ليلة</span> 
                 <span class="number1"> @Model.Price </span> 
-
-
             </p>
           
             <div class="times">
@@ -76,16 +73,9 @@
                 <img src="~/Image/logout.png" alt="">
               </p>
             </div>
-            @if(!isAdmin)
+            @if(isUser)
             {
-                @if(Model.Booked)
-                    {
-                        <div><a class="btn btn-success">محجوزة</a></div>
-                    }
-                    else
-                    {
-                        <a asp-controller="Farm" asp-action="Booking" asp-route-id="@Model.Id" class="btn btn-success">احجز</a>                   
-                    }
+                <a asp-controller="Farm" asp-action="Booking" asp-route-id="@Model.Id" class="btn btn-success">احجز</a>                   
             }
           </div> 
 
@@ -97,7 +87,7 @@
         <div class="details">
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                @if(signIn && !isAdmin)
+                @if(signIn && isUser)
                 {
                     <button class="nav-link " id="nav-rate-tab" data-bs-toggle="tab" data-bs-target="#nav-rate" type="button" role="tab" aria-controls="nav-rate" aria-selected="true">التقييم </button>                
                 }
@@ -117,7 +107,7 @@
                     <div class="content">
                       
                       <h5>المجالس </h5>
-                      <img src="../image-all/1.png" alt="">
+                      <img src="~/Image//1.png" alt="">
                     </div>
 
                   </button>
@@ -137,7 +127,7 @@
                       
                       <div class="content">
                         <h5>المسابح </h5>
-                        <img src="../image-all/2.png" alt="">
+                        <img src="~/Image/2.png" alt="">
                       </div>
   
                     </button>
@@ -158,7 +148,7 @@
                       <div class="content">
                         
                         <h5 class="text1">غرف النوم والأسرة </h5>
-                        <img src="../image-all/3.png" alt="">
+                        <img src="~/Image/3.png" alt="">
                       </div>
   
                     </button>
@@ -178,7 +168,7 @@
                         
                         <div class="content">
                           <h5 class="text2">دورات المياه</h5>
-                          <img src="../image-all/4.png" alt="">
+                          <img src="~/Image/4.png" alt="">
                         </div>
     
                       </button>
@@ -198,7 +188,7 @@
                           
                           <div class="content">
                             <h5>المطبخ</h5>
-                            <img src="../image-all/5.png" alt="">
+                            <img src="~/Image/5.png" alt="">
                           </div>
       
                         </button>
@@ -218,7 +208,7 @@
                             
                             <div class="content">
                               <h5 class="text3">المرافق العامة</h5>
-                              <img src="../image-all/6.png" alt="">
+                              <img src="~/Image/6.png" alt="">
                             </div>
         
                           </button>
@@ -247,7 +237,7 @@
                     <p style="font-size:10px;float:left">@comment.CreatedDate.ToShortDateString() @comment.CreatedDate.ToShortTimeString()</p>
                     </div>
                 }
-               @if(signIn && !isAdmin)
+               @if(signIn && isUser)
                {
                 <form asp-controller="Farm" asp-action="AddComment">
                     <div class="comment">
@@ -258,7 +248,7 @@
                 </form>
                }
                         </div>
-               @if(signIn && !isAdmin)
+               @if(signIn && isUser)
                         {
                              <div class="tab-pane fade" id="nav-rate" role="tabpanel" aria-labelledby="nav-rate-tab">
              
@@ -308,15 +298,10 @@
                     </a>
                   </label>
                 </form>
-
                 <button class="submit"> أرسل</button>
-                
               </div>
-             
             </div>
-                        }
-                       
-
+                        }   
           </div>
         </div>
       </div>
@@ -324,8 +309,6 @@
     </div>
   </div>
 </div>
-
-
 
 <script>
 Fancybox.bind('[data-fancybox="gallery"]', {

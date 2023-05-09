@@ -3,10 +3,11 @@
 @using Chaletin.Areas.Identity.Data
 @inject ChaletinDbContext _context
 @{
-    var TotalAvailableFarmsAvg = @Model.TotalAvailableFarms/@Model.TotalFarms*100;
-    var TotalNotAvailableFarmsAvg = @Model.TotalNotAvailableFarms/@Model.TotalFarms*100;
-    var TotalPayedAmountAvg = Model.TotalPayedAmount/0.01*100;
-    var TotalBookedFarmsAvg = Model.TotalBookedFarms/@Model.TotalFarms*100;
+    var TotalAvailableFarmsAvg = @Model.TotalAvailableFarms / @Model.TotalFarms * 100;
+    var TotalNotAvailableFarmsAvg = @Model.TotalNotAvailableFarms / @Model.TotalFarms * 100;
+    var TotalPayedAmountAvg = Model.TotalPayedAmount / 0.01 * 100;
+    var TotalBookedFarmsAvg = Model.TotalBookedFarms / @Model.TotalFarms * 100;
+    var isBlocked = ViewBag.User;
 }
 <style>
     .progress {
@@ -79,6 +80,10 @@
         }
 
 </style>
+@if (isBlocked)
+{
+    <div style="position: fixed;color: wheat;background-color: black;z-index: 1;text-align: center;margin-left: 5%;opacity: 0.6;">⚠ <br>Account is disabled</div>
+}
 <div class="landing">
     <div class="overlay"></div>
     <div class="text">
@@ -139,7 +144,7 @@
                                 <div class="h2 font-weight-bold">@Model.TotalNotAvailableFarms<sup class="small"></sup></div>
                             </div>
                         </div>
-                      
+
                     </div>
                 </div>
 
@@ -159,7 +164,7 @@
                                 <div class="h2 font-weight-bold">@Model.TotalAvailableFarms<sup class="small"></sup></div>
                             </div>
                         </div>
-                      
+
                     </div>
                 </div>
 
@@ -179,7 +184,7 @@
                                 <div class="h2 font-weight-bold">@Model.TotalBookedFarms<sup class="small"></sup></div>
                             </div>
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
@@ -192,7 +197,6 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="card mb-3">
                             <div class="row ">
-
                                 <div class="col-md-6">
                                     <div class="card-body">
                                         <h5 class="card-title">@item.Title</h5>
@@ -211,20 +215,30 @@
                                         <p class="card-text2"> @item.City <i class="bi bi-geo-alt-fill"></i></p>
                                         <p class="card-text3">@item.Price دينار/ليلة</p>
                                         <div>
-                                            @if(@item.Available)
+                                            @if (@item.Blocked)
                                             {
-                                                <a asp-controller="Farm" asp-action="ChangeAvailability" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-danger">تعطيل</a>
+                                                <button class="btn btn-danger" disabled>تم حجب العقار</button>
                                             }
                                             else
                                             {
-                                                <a asp-controller="Farm" asp-action="ChangeAvailability" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-success">تفعيل</a>
+                                                @if (@item.Available)
+                                                {
+                                                    <a asp-controller="Farm" asp-action="ChangeAvailability" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-danger">تعطيل</a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="Farm" asp-action="ChangeAvailability" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-success">تفعيل</a>
+                                                }
                                             }
-                                            <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-success">عرض التفاصيل</a>
+                                            @if (!@item.Blocked)
+                                            {
+                                                <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-success">عرض التفاصيل</a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id"><img src="~/Image/Chalets.jpg" alt="farm"></a>
+                                    <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id"><img src="~/FarmImages/@item.Images[0]" alt="farm"></a>
                                 </div>
                             </div>
                         </div>

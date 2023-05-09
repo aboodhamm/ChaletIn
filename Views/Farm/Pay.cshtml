@@ -1,49 +1,90 @@
 ﻿@model Chaletin.Models.Model.BookingViewModel
+<style>
+    .disabled {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .paymentAlert {
+        top: 30%;
+        left: 35%;
+        position: absolute;
+    }
+
+    .alert {
+        display: none;
+    }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #6a2bb1;
+        width: 120px;
+        height: 120px;
+        animation: spin 0.9s linear infinite;
+        margin-left: 100%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 <div class="payment">
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="content">
-                    <form asp-controller="Farm" asp-action="ConfirmPayment">
+                    <form asp-controller="Farm" id="paymentForm" asp-action="ConfirmPayment">
                         @Html.HiddenFor(x=>x.Id)
-                    <div class="title">
-                        <h5> البطاقة  الإئتمانية</h5>
-                    </div>
-
-                    <div class="account">
-                        <div class="image">
-                            <p>دفع آمن ومضمون <img src="~/Image/credit-card.png" alt="" srcset=""></p>
-                            <img class="master" src="~/Image/Group.png" alt="">
+                        <div class="title">
+                            <h5> البطاقة  الإئتمانية</h5>
                         </div>
 
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-lg-7">
-                                <img src="~/Image/Group1052.png" alt="" srcset="">
+                        <div class="account">
+                            <div class="image">
+                                <p>دفع آمن ومضمون <img src="~/Image/credit-card.png" alt="" srcset=""></p>
+                                <img class="master" src="~/Image/Group.png" alt="">
                             </div>
-                            <div class="col-12 col-md-6 col-lg-5">
-                                <div class="row">
-                                    <div class="col-12 col-md-6 col-lg-12">
-                                        <label for="">رقم البطاقة</label>
-                                        <input type="text" minlength="16" maxlength="16" required onkeypress="return validateNumber(event)" placeholder="0000 0000 0000 0000">
-                                    </div>
-                                    <div class="row expire">
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <label for="">CVV </label>
-                                            <input type="text" minlength="3" maxlength="3" required onkeypress="return validateNumber(event)" placeholder="000">
+
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-7">
+                                    <img src="~/Image/Group1052.png" alt="" srcset="">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-5">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-12">
+                                            <label for="">رقم البطاقة</label>
+                                            <input type="text" minlength="16" maxlength="16" id="creditNum" required onkeypress="return validateNumber(event);" onchange="check();" placeholder="0000 0000 0000 0000">
                                         </div>
-                                        <div class="col-12 col-md-6 col-lg-6">
-                                            <label for=""> تاريخ الإنتهاء</label>
-                                            <input type="text" minlength="4" maxlength="4" onkeypress="return validateNumber(event)" required placeholder="MM/YY">
+                                        <div class="row expire">
+                                            <div class="col-12 col-md-6 col-lg-6">
+                                                <label for="">CVV </label>
+                                                <input type="text" minlength="3" maxlength="3" id="cvv" required onkeypress="return validateNumber(event);" onchange="check();" placeholder="000">
+                                            </div>
+                                            <div class="col-12 col-md-6 col-lg-6">
+                                                <label for=""> تاريخ الإنتهاء</label>
+                                                <input type="text" minlength="4" maxlength="4" id="expiryDate" onkeypress="return validateNumber(event);" onchange="check();" required placeholder="MM/YY">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pay">
-                        <p>المبلغ الكلي <h5><span> دينار </span> @Model.TotalAmount </h5></p>
-                        <button class="btn btn-success" type="submit">إدفع الآن</button>
-                    </div>
+                        <div class="pay">
+                            <p>المبلغ الكلي <h5><span> دينار </span> @Model.TotalAmount </h5></p>
+                            <button id="payBtn" disabled class="btn btn-success" onclick="disable()" type="button">إدفع الآن</button>
+                            <button type="submit" id="submitBtn" style="display:none"></button>
+                        </div>
+                        <div class="paymentAlert">
+                            <div class="loader alert"></div>
+                            <div class="alert alert-success" role="alert">@Model.TotalAmount JOD has been successfully processed</div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -51,9 +92,55 @@
     </div>
 </div>
 <script>
-function validateNumber(e) {
-            const pattern = /^[0-9]$/;
+        function disable()
+        {
+            var creditNum = $('#creditNum').val().length;
+            var expiryDate = $('#expiryDate').val().length;
+            var cvv = $('#cvv').val().length;
+            debugger;
+            if(creditNum == 16 && cvv == 3 && expiryDate == 4)
+            {
+                document.getElementById("disable").classList.add("disabled");
+            $('.loader').css('display','block');
+            var $alert = $('.alert');
+            setTimeout(function() {
+            setTimeout(function() {
+                setTimeout(function() {
+                    setTimeout(function() {
+                        $alert.css('display', 'block');
+                        $('.loader').css('display','none');
+                        }, 500);
+                    }, 2000);
+                }, 1000);
+            }, 1000);
+            confirmPayment();
+            }
 
-            return pattern.test(e.key)
-}
+        };
+    function confirmPayment()
+    {
+        setTimeout(function() {
+
+    document.getElementById("submitBtn").click();},6000);
+    };
+    function validateNumber(e) {
+                    const pattern = /^[0-9]$/;
+
+                    return pattern.test(e.key)
+    };
+    function check()
+    {
+        debugger;
+         var creditNum = $('#creditNum').val().length;
+            var expiryDate = $('#expiryDate').val().length;
+            var cvv = $('#cvv').val().length;
+            if(creditNum == 16 && cvv == 3 && expiryDate == 4)
+            {
+                document.getElementById("payBtn").disabled = false;
+            }
+            else
+            {
+                document.getElementById("payBtn").disabled = true;
+            }
+    };
 </script>

@@ -1,0 +1,49 @@
+﻿@model List<Chaletin.Areas.Identity.Data.Farm>
+<div class="container">
+    <div class="cards">
+        <div class="row">
+            @foreach (var item in @Model)
+            {
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card mb-3">
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Title</h5>
+                                    <p class="card-text1">
+                                        @{
+                                            for (int rate = 1; rate <= @item.Rate; rate++)
+                                            {
+                                                if (rate > 5)
+                                                {
+                                                    break;
+                                                }
+                                                <i class="fas fa-star" style="color:yellow"></i>
+                                            }
+                                        }
+                                    </p>
+                                    <p class="card-text2"> @item.City <i class="bi bi-geo-alt-fill"></i></p>
+                                    <p class="card-text3">@item.Price دينار/ليلة</p>
+                                    <div>
+                                        @if (@item.Blocked)
+                                        {
+                                            <a asp-controller="Profile" asp-action="Block" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-success">الغاء الحجب</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Profile" asp-action="Block" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-danger">حجب</a>
+                                        }
+                                        <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id" style="margin-left:0" class="btn btn-success">عرض التفاصيل</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <a asp-controller="Farm" asp-action="FarmDetails" asp-route-id="@item.Id"><img src="~/FarmImages/@item.Images[0]" alt="farm"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

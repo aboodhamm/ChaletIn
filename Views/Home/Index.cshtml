@@ -73,7 +73,6 @@
             top: 0;
             left: 0;
         }
-
 </style>
 <div class="landing">
     <div class="overlay"></div>
@@ -81,15 +80,15 @@
         <div class="content">
             <h2>
 
-                    <span class="checkin">احجز الآن</span>
-                    <br>
-                    شاليهك . مزرعتك . عرسك
-                    <br>
+                <span class="checkin">احجز الآن</span>
+                <br>
+                شاليهك . مزرعتك . عرسك
+                <br>
 
-                </h2>
-                <p>
-                    موقع إلكتروني متخصص بحجز الشاليهات و المزارع و قاعات الأفراح على مستوى المملكة ، أسرع طريقة للحصول على أفضل إختيار
-                </p>
+            </h2>
+            <p>
+                موقع إلكتروني متخصص بحجز الشاليهات و المزارع و قاعات الأفراح على مستوى المملكة ، أسرع طريقة للحصول على أفضل إختيار
+            </p>
         </div>
     </div>
 </div>
@@ -165,25 +164,7 @@
     </div>
 </section>
 <script>
-        $(function() {
-      $(".progress").each(function() {
-
-        var value = $(this).attr('data-value');
-        var left = $(this).find('.progress-left .progress-bar');
-        var right = $(this).find('.progress-right .progress-bar');
-
-        if (value > 0) {
-          if (value <= 50) {
-            right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
-          } else {
-            right.css('transform', 'rotate(180deg)')
-            left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
-          }
-        }
-      })
-
-      function percentageToDegrees(percentage) {
+    function percentageToDegrees(percentage) {
         return percentage / 100 * 360
-      }
-    });
+    };
 </script>

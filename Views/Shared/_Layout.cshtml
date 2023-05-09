@@ -5,7 +5,8 @@
 @inject UserManager<User> UserManager
 @inject ChaletinDbContext _context
 @{
-    var isAdmin = _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault()); 
+    var isAdmin = _context.UserRoles.Where(x => x.RoleId == "2").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
+    var isSystemAdmin = _context.UserRoles.Where(x => x.RoleId == "1").Any(x => x.UserId == _context.Users.Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).Select(x => x.Id).FirstOrDefault());
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -29,57 +30,86 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ffc825;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #e6ac00;
+            }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg  navbar-dark py-0 fixed-top">
+<body id="disable">
+    <nav class="navbar navbar-expand-lg  navbar-dark py-0 fixed-top" style="position:sticky!important">
         <div class="container">
-            @*<div class="login">
-                <a asp-controller="Login" asp-action="Login">
-                <p>   تسجيل / تسجيل الدخول <img src="~/Image/user (1).png" alt=""> </p>
-
-                </a>
-                </div> *@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav ">
-                     <li>
+                    <li>
                         <partial name="_LoginPartial" />
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="ContactUs">تواصل معنا</a>
-                    </li>
-                    @if(isAdmin)
+                    @if (!isSystemAdmin)
                     {
-                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Farm" asp-action="Add">أضف عقارك</a>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="ContactUs">تواصل معنا</a>
+                        </li>   
+                    }
+                    @if (isAdmin && !isSystemAdmin)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Farm" asp-action="Add">أضف عقارك</a>
                         </li>
                     }
-                    @if(!isAdmin)
+                    @if (!isAdmin && !isSystemAdmin)
                     {
-                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Farm" asp-action="Index" asp-route-Type=1>مزارع</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Farm" asp-action="Index" asp-route-Type=2>شاليهات</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Farm" asp-action="Index" asp-route-Type=3>مزارع للأفراح</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Farm" asp-action="Index" asp-route-Type=1>مزارع</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Farm" asp-action="Index" asp-route-Type=2>شاليهات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Farm" asp-action="Index" asp-route-Type=3>مزارع للأفراح</a>
+                        </li>
+                    }
+                    @if (isSystemAdmin)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Profile" asp-action="Messages">الرسائل</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Profile" asp-action="Investors">العملاء</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Profile" asp-action="Clients">المستخدمين</a>
+                        </li>
                     }
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Index">الرئيسية</a>
-                    </li>   
+                    </li>
                 </ul>
             </div>
             <a class="navbar-brand" href="#"> <img src="~/Image/logo2.jpg" alt=""></a>
         </div>
     </nav>
     @RenderBody()
-    <footer>
+    @if (!isSystemAdmin)
+    {
+        <footer>
         <div class="container">
             <div class="row">
                 <div class="col-3 col-md-4 col-lg-4">
@@ -111,7 +141,8 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>    
+    }
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
