@@ -46,6 +46,11 @@ namespace Chaletin.Controllers
                 _context.SaveChanges();
             }
         }
+
+        protected int GetSum(int x, int y)
+        {
+            return x + y;
+        }
         #endregion
     }
 }
